@@ -104,7 +104,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'name_key': ['LENOIR', '16BPdwSY4rTxz1s5j'],
             'addr_key': ['LENOIR']
         },
-        '9': {
+        '99999': {
             'name_key': ['PAPERMILL', '169lRsSY4qSev1u1U', 'LANDMARK'],
             'addr_key': ['BROOKVALE', 'PAPERMILL']
         },
