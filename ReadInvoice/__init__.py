@@ -8,6 +8,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     invoice_uri = req.params.get('uri')
 
+    #test line
+
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
     key = "ca0e0a76bd9a4eb890ebb3bed141ae23"
 
