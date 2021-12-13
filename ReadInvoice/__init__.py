@@ -7,6 +7,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
 
     invoice_uri = req.params.get('uri')
+    key = req.params.get('key')
 
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
     
@@ -175,10 +176,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             pass
         else:
             invoice__uri = req_body.get('uri')
-            #key = req_body.get('key')
-
-    key_dict = { 'key': 'key' }
-
+            
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
         poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
@@ -367,13 +365,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if items:
                 json_dict['line_items'] = items
 
-            
 
         #return func.HttpResponse("Test 3", status_code=210)
 
         return func.HttpResponse(
             json.dumps(
-                key_dict
+                json_dict
             ),
             mimetype='application/json'
         )
