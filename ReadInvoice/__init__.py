@@ -34,6 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'inv_summarized': False
         },
         'J & F MECHANICAL': {
+            'cust_name_type': '',
             'sage_id': 'J&F MEC',
             'inv_summarized': False
         },
