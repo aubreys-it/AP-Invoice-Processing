@@ -375,8 +375,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             ),
             mimetype='application/json'
         )
-
-
+        
     else:
         return func.HttpResponse(
              "Not enough information to process invoice. Check that both Vendor and Invoice URI were passed.",
