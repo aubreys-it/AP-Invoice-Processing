@@ -177,6 +177,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             invoice__uri = req_body.get('uri')
             key = req_body.get('key')
 
+    key_dict = { 'key': key }
+
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
         poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
@@ -371,7 +373,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
         return func.HttpResponse(
             json.dumps(
-                json_dict
+                key_dict
             ),
             mimetype='application/json'
         )
