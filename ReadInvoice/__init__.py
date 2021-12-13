@@ -34,7 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'inv_summarized': False
         },
         'J & F MECHANICAL': {
-            'cust_name_type': '',
+            'cust_name_type': 'bill_name',
             'sage_id': 'J&F MEC',
             'inv_summarized': False
         },
@@ -146,7 +146,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['PINNACLE', 'BRISTOL']
         },
         '18': {
-            'name_key': ['MORRISTOWN', '169lRsSY4sLmL1vml', 'AUBMOR'],
+            'name_key': ['MORRISTOWN', '169lRsSY4sLmL1vml', 'AUBMOR', 'MORRIST'],
             'addr_key': ['EVAN GREEN', 'MORRISTOWN']
         },
         '20': {
@@ -234,6 +234,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
                         json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
+                    elif vendor_dict['loc_name']['cust_name_type'] == 'bill_name':
+                        json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
                         json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
             
