@@ -236,7 +236,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
                         json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
-                    elif vendor_dict['loc_name']['cust_name_type'] == 'bill_name':
+                    elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
                         json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
                         json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
