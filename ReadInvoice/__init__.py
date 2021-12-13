@@ -8,7 +8,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     invoice_uri = req.params.get('uri')
     key = req.params.get('key')
-
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
     
     #keys based on unique keywords in vendor name
@@ -176,6 +175,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             pass
         else:
             invoice__uri = req_body.get('uri')
+
+    if not key:
+        key = req_body.get('key')
+
             
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
