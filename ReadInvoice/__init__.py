@@ -13,44 +13,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     #keys based on unique keywords in vendor name
     vendor_dict = {
-        'PRODUCE': {
-            'cust_name_type': 'ship_name',
-            'sage_id': 'VALL',
-            'inv_summarized': False
-        },
-        'TRITEX': {
-            'cust_name_type': 'cust_name',
-            'sage_id': 'TRITEX',
-            'inv_summarized': False
-        },
-        'COZZINI': {
-            'cust_name_type': 'ship_name',
-            'sage_id': 'COZZINI',
-            'inv_summarized': False
-        },
-        'QUALITY BAKER': {
-            'cust_name_type': 'cust_name',
-            'sage_id': 'QuAL BA',
-            'inv_summarized': False
-        },
-        'VIENNA': {
-            'cust_name_type': 'ship_name',
-            'sage_id': 'VIENNA',
-            'inv_summarized': False
-        },
         'AQUA CLEAR': {
             'cust_name_type': 'serv_name',
             'sage_id': 'AQUA CL',
-            'inv_summarized': False
-        },
-        'WASSERSTROM': {
-            'cust_name_type': 'ship_name',
-            'sage_id': 'WASSERS',
-            'inv_summarized': False
-        },
-        'PREPWIZARD': {
-            'cust_name_type': 'ship_name',
-            'sage_id': 'PREPWIZARD',
             'inv_summarized': False
         },
         'CARTRIDGE': {
@@ -58,14 +23,53 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'sage_id': 'CARTRID',
             'inv_summarized': False
         },
-        'NIEDLOV': {
+        'COZZINI': {
             'cust_name_type': 'ship_name',
-            'sage_id': 'NIEDLOV',
+            'sage_id': 'COZZINI',
             'inv_summarized': False
         },
         'HOBART': {
             'cust_name_type': 'serv_name',
             'sage_id': 'HOB SER',
+            'inv_summarized': False
+        },
+        'J & F MECHANICAL': {
+            'sage_id': 'J&F MEC',
+            'inv_summarized': False
+        },
+        'NIEDLOV': {
+            'cust_name_type': 'ship_name',
+            'sage_id': 'NIEDLOV',
+            'inv_summarized': False
+        },
+        'PREPWIZARD': {
+            'cust_name_type': 'ship_name',
+            'sage_id': 'PREPWIZARD',
+            'inv_summarized': False
+        },
+        'PRODUCE': {
+            'cust_name_type': 'ship_name',
+            'sage_id': 'VALL',
+            'inv_summarized': False
+        },
+        'QUALITY BAKER': {
+            'cust_name_type': 'cust_name',
+            'sage_id': 'QuAL BA',
+            'inv_summarized': False
+        },
+        'TRITEX': {
+            'cust_name_type': 'cust_name',
+            'sage_id': 'TRITEX',
+            'inv_summarized': False
+        },
+        'VIENNA': {
+            'cust_name_type': 'ship_name',
+            'sage_id': 'VIENNA',
+            'inv_summarized': False
+        },
+        'WASSERSTROM': {
+            'cust_name_type': 'ship_name',
+            'sage_id': 'WASSERS',
             'inv_summarized': False
         },
         'WORLD': {
