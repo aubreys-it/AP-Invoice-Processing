@@ -178,10 +178,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if not key:
         key = req_body.get('key')
-
-    key_dict = { 'key': key }
-
-    '''     
+     
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
         poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
@@ -372,19 +369,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
 
         #return func.HttpResponse("Test 3", status_code=210)
-        '''
+        return func.HttpResponse(
+            json.dumps(
+                json_dict
+            ),
+            mimetype='application/json'
+        )
 
-    return func.HttpResponse(
-        json.dumps(
-            key_dict
-        ),
-        mimetype='application/json'
-    )
 
-'''
     else:
         return func.HttpResponse(
              "Not enough information to process invoice. Check that both Vendor and Invoice URI were passed.",
              status_code=200
         )
-'''
