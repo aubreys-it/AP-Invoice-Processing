@@ -175,9 +175,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             pass
         else:
             invoice__uri = req_body.get('uri')
-            key = req_body.get('key')
+            #key = req_body.get('key')
 
-    key_dict = { 'key': key }
+    key_dict = { 'key': 'key' }
 
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
