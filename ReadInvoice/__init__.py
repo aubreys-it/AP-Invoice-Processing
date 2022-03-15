@@ -44,7 +44,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         'PREPWIZARD': {
             'cust_name_type': 'ship_name',
-            'sage_id': 'PREPWIZARD',
+            'sage_id': 'PREPWIZ',
             'inv_summarized': False
         },
         'PRODUCE': {
