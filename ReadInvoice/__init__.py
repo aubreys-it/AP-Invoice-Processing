@@ -62,7 +62,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         'QUALITY BAKER': {
             'cust_name_type': 'cust_name',
-            'sage_id': 'QuAL BA',
+            'sage_id': 'CYBAKE',
             'inv_summarized': False,
             'expect_loc_id': True
         },
