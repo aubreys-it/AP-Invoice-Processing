@@ -306,7 +306,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
                             loc_id = loc
 
-            if vendor_dict[sage_vendors['vendor_name']]['expect_loc_id']:
+            if vendor_dict[sage_vendors[json_dict['vendor_name']]]['expect_loc_id']:
                 json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
 
             if invoice_date:
