@@ -91,6 +91,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'expect_loc_id': True
         }
     }
+    
+    sage_vendors = {}
+    for v in vendor_dict.keys():
+        sage_vendors[vendor_dict[v]['sage_id']] = v
 
     location_dict = {
         '2': {
@@ -302,7 +306,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
                             loc_id = loc
 
-            if vendor_dict[json_dict['vendor_name']]['expect_loc_id']:
+            if vendor_dict[sage_vendors['vendor_name']]['expect_loc_id']:
                 json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
 
             if invoice_date:
