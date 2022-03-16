@@ -150,7 +150,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         '20': {
             'name_key': ['CATERING', '919', 'BYTCAT'],
-            'addr_key': ['HOMBERG', '919', 'CENTRAL AVE']
+            'addr_key': ['HOMBERG', 'CENTRAL AVE']
         },
         '21': {
             'name_key': ['JOHNSON', 'JC', '16COOrSY4sXNu1qdT', 'AUBJOH'],
