@@ -15,67 +15,80 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         'AQUA CLEAR': {
             'cust_name_type': 'serv_name',
             'sage_id': 'AQUA CL',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'CARTRIDGE': {
             'cust_name_type': 'ship_name',
             'sage_id': 'CARTRID',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'COZZINI': {
             'cust_name_type': 'ship_name',
             'sage_id': 'COZZINI',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'HOBART': {
             'cust_name_type': 'serv_name',
             'sage_id': 'HOB SER',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'J & F MECHANICAL': {
             'cust_name_type': 'bill_name',
             'sage_id': 'J&F MEC',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'NIEDLOV': {
             'cust_name_type': 'ship_name',
             'sage_id': 'NIEDLOV',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'PREPWIZARD': {
             'cust_name_type': 'ship_name',
             'sage_id': 'PREPWIZ',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'PRODUCE': {
             'cust_name_type': 'ship_name',
             'sage_id': 'VALL',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'QUALITY BAKER': {
             'cust_name_type': 'cust_name',
             'sage_id': 'QuAL BA',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'TRITEX': {
             'cust_name_type': 'cust_name',
             'sage_id': 'TRITEX',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'VIENNA': {
             'cust_name_type': 'ship_name',
             'sage_id': 'VIENNA',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': True
         },
         'WASSERSTROM': {
             'cust_name_type': 'ship_name',
             'sage_id': 'WASSERS',
-            'inv_summarized': False
+            'inv_summarized': False,
+            'expect_loc_id': False
         },
         'WORLD': {
             'cust_name_type': 'in_table',
             'sage_id': 'WORLDSP',
-            'inv_summarized': True
+            'inv_summarized': True,
+            'expect_loc_id': True
         }
     }
 
@@ -289,7 +302,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
                             loc_id = loc
 
-            json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
+            if vendor_dict[json_dict['vendor_name']]['expect_loc_id']:
+                json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
 
             if invoice_date:
                 json_dict['inv_date'] = str(invoice_date.value)
