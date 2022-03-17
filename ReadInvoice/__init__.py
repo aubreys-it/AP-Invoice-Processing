@@ -358,12 +358,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     
                 product_code = item.value.get("ProductCode")
                 if product_code:
-                    for loc in location_dict:
-                        for key in location_dict[loc]['name_key']:
-                            if description.upper().find(key.upper()) >= 0:
-                                loc_id  = loc
+                    if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_summarized']:
+                        for loc in location_dict:
+                            for key in location_dict[loc]['name_key']:
+                                if description.upper().find(key.upper()) >= 0:
+                                    loc_id  = loc
                                 
-                    line_item['product_code'] = loc_id + '-' + str(product_code.value.replace("'", "''"))
+                        line_item['product_code'] = loc_id + '-' + str(product_code.value.replace("'", "''"))
+                    else:
+                        line_item['product_code'] = str(product_code.value.replace("'", "''"))
                 else:
                     line_item['product_code'] = ''
                     
