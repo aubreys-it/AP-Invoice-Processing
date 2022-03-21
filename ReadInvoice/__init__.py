@@ -54,9 +54,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'inv_summarized': False,
             'expect_loc_id': True
         },
-        'PRODUCE': {
+        'DIXIE': {
             'cust_name_type': 'ship_name',
-            'sage_id': 'VALL',
+            'sage_id': 'DIXIEPR',
             'inv_summarized': False,
             'expect_loc_id': True
         },
@@ -232,12 +232,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
 
-            if vendor_name:
+            if remittance_address_recipient:
+                json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
+            elif vendor_name:
                 json_dict['vendor_name'] = str(vendor_name.value.replace("'", "''"))
             elif vendor_address:
                 json_dict['vendor_name'] = str(vendor_address.value.replace("'", "''"))
             elif vendor_address_recipient:
                 json_dict['vendor_name'] = str(vendor_address_recipient.value.replace("'", "''"))
+            elif remittance_address:
+                json_dict['vendor_name'] = str(remittance_address.value.replace("'", "''"))
             else:
                 json_dict['vendor_name'] = ''
 
@@ -271,8 +275,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     json_dict['loc_name'] = str(customer_address_recipient.value.replace("'", "''"))
                 elif billing_address_recipient:
                     json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
-                elif remittance_address_recipient:
-                    json_dict['loc_name'] = str(remittance_address_recipient.value.replace("'", "''"))
                 else:
                     json_dict['loc_name'] = ''
 
@@ -284,8 +286,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 json_dict['loc_addr'] = str(billing_address.value.replace("'", "''"))
             elif service_address:
                 json_dict['loc_addr'] = str(service_address.value.replace("'", "''"))
-            elif remittance_address:
-                json_dict['loc_addr'] = str(remittance_address.value.replace("'", "''"))
             else:
                 json_dict['loc_addr'] = ''
 
