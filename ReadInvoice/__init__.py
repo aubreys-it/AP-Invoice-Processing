@@ -117,7 +117,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         '5': {
             'name_key': ['MARYVILLE', 'AzqNMmSY4qGKj1rhz', '- MARYVILLE', "AUBREY'S INC."],
-            'addr_key': ['- MARYVILLE']
+            'addr_key': ['- MARYVILLE'],
+            'exclude_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY']
         },
         '6': {
             'name_key': ['HIXSON', '169lRsSY4rjvz1ulr', 'CHATTANOOGA'],
@@ -144,8 +145,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CLEVELAND']
         },
         '12': {
-            'name_key': ['BLUETICK', 'BLUMAR', 'BARLEY\'S-MARYVILLE'],
-            'addr_key': ['BROADWAY', 'BLUE TICK']
+            'name_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY'],
+            'addr_key': ['BROADWAY', 'BLUE TICK'],
+            'exclude_key': ['AzqNMmSY4qGKj1rhz']
         },
         '13': {
             'name_key': ['RIDGE', '16CVqvSY4rpAd1xwu', '- OR'],
@@ -302,10 +304,22 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_number'] = ''
 
+            key_found = False
+            exclude_key = False
+                
             for loc in location_dict:
                 for key in location_dict[loc]['name_key']:
                     if json_dict['loc_name'].upper().find(key.upper()) >= 0:
+                        key_found = True
+                    if 'exclude_key' in location_dict[loc]:
+                        for excl in location_dict[loc]['exclude_key']:
+                            if json_dict['loc_name'].upper().find(excl.upper()) >= 0:
+                                exclude_key = True
+                                
+                    if key_found and not exclude_key:
                         loc_id = loc
+                        
+                    key_found = exclude_key = False
 
                 if loc_id == '99':
                     for key in location_dict[loc]['addr_key']:
