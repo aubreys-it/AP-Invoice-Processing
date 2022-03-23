@@ -353,31 +353,31 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             for idx, item in enumerate(invoice.fields.get("Items").value):
                 line_item = {}
                 description = item.value.get("Description")
-                if description:
+                try:
                     line_item['description'] = str(description.value.replace("'", "''"))
-                else:
+                except:
                     line_item['description'] = ''
 
                 quantity = item.value.get("Quantity")
-                if quantity:
+                try:
                     line_item['quantity'] = re.findall(r"[-+]?\d*\.\d+|\d+", str(quantity.value))[0]
-                else:
+                except:
                     line_item['quantity'] = 'NULL'
 
                 unit = item.value.get("Unit")
-                if unit:
+                try:
                     line_item['unit'] = str(unit.value.replace("'", "''"))
-                else:
+                except:
                     line_item['unit'] = ''
                 
                 unit_price = item.value.get("UnitPrice")
-                if unit_price:
+                try:
                     line_item['unit_price'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(unit_price.value_data.text.replace('(', '-')))[0]
-                else:
+                except:
                     line_item['unit_price'] = 'NULL'
                     
                 product_code = item.value.get("ProductCode")
-                if product_code:
+                try:
                     if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_summarized']:
                         for loc in location_dict:
                             for key in location_dict[loc]['name_key']:
@@ -387,25 +387,25 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         line_item['product_code'] = loc_id + '-' + str(product_code.value.replace("'", "''"))
                     else:
                         line_item['product_code'] = str(product_code.value.replace("'", "''"))
-                else:
+                except:
                     line_item['product_code'] = ''
                     
                 date = item.value.get("Date")
-                if date:
+                try:
                     line_item['date'] = str(date.value)
-                else:
+                except:
                     line_item['date'] = ''
 
                 tax = item.value.get("Tax")
-                if tax:
+                try:
                     line_item['tax'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(tax.value_data.text.replace('(', '-')))[0]
-                else:
+                except:
                     line_item['tax'] = 'NULL'
                     
                 amount = item.value.get("Amount")
-                if amount:
+                try:
                     line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value_data.text.replace('(', '-')))[0]
-                else:
+                except:
                     line_item['amount'] = 'NULL'
 
                 items.append(line_item)
