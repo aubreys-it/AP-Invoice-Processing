@@ -36,6 +36,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'inv_summarized': False,
             'expect_loc_id': True
         },
+        'HOLSTON': {
+            'cust_name_type': 'cust_name',
+            'sage_id': 'HOLSTON',
+            'inv_summarized': False,
+            'expect_loc_id': True
+        },
         'J & F MECHANICAL': {
             'cust_name_type': 'bill_name',
             'sage_id': 'J&F MEC',
@@ -118,7 +124,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CHATTANOOGA', 'HIXSON']
         },
         '7': {
-            'name_key': ['UT CAMPUS'],
+            'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND'],
             'addr_key': ['UT CAMPUS']
         },
         '8': {
@@ -126,7 +132,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['LENOIR']
         },
         '9': {
-            'name_key': ['PAPERMILL', '169lRsSY4qSev1u1U', 'LANDMARK'],
+            'name_key': ['PAPERMILL', '169lRsSY4qSev1u1U', 'LANDMARK', '*MASTER*'],
             'addr_key': ['BROOKVALE', 'PAPERMILL']
         },
         '10': {
@@ -138,7 +144,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CLEVELAND']
         },
         '12': {
-            'name_key': ['BLUETICK', 'BLUMAR'],
+            'name_key': ['BLUETICK', 'BLUMAR', 'BARLEY\'S-MARYVILLE'],
             'addr_key': ['BROADWAY', 'BLUE TICK']
         },
         '13': {
