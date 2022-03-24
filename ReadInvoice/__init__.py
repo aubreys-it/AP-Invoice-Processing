@@ -9,7 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     invoice_uri = req.params.get('uri')
     key = req.params.get('key')
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
-    
+    '''
     #keys based on unique keywords in vendor name
     vendor_dict = {
         'AQUA CLEAR': {
@@ -193,7 +193,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     }
 
     loc_id = '99'
-
+    '''
     if not invoice_uri:
         try:
             req_body = req.get_json()
@@ -240,7 +240,62 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             service_address_recipient = invoice.fields.get("ServiceAddressRecipient")
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
-
+            
+            if vendor_name:
+                json_dict['vendor_name'] = vendor_name
+            if vendor_address:
+                json_dict['vendor_address'] = vendor_address
+            if vendor_address_recipient:
+                json_dict['vendor_address_recipient'] = vendor_address_recipient
+            if customer_name:
+                json_dict['customer_name'] = customer_name
+            if customer_id:
+                json_dict['customer_id'] = customer_id
+            if customer_address:
+                json_dict['customer_address'] = customer_address
+            if customer_address_recipient:
+                json_dict['customer_address_recipient'] = customer_address_recipient
+            if invoice_id:
+                json_dict['invoice_id'] = invoice_id
+            if invoice_date:
+                json_dict['invoice_date'] = invoice_date
+            if invoice_total:
+                json_dict['invoice_total'] = invoice_total
+            if due_date:
+                json_dict['due_date'] = due_date
+            if purchase_order:
+                json_dict['purchase_order'] = purchase_order
+            if billing_address:
+                json_dict['billing_address'] = billing_address
+            if billing_address_recipient:
+                json_dict['billing_address_recipient'] = billing_address_recipient
+            if shipping_address:
+                json_dict['shipping_address'] = shipping_address
+            if shipping_address_recipient:
+                json_dict['shipping_address_recipient'] = shipping_address_recipient
+            if subtotal:
+                json_dict['subtotal'] = subtotal
+            if total_tax:
+                json_dict['total_tax'] = total_tax
+            if previous_unpaid_balance:
+                json_dict['previous_unpaid_balance'] = previous_unpaid_balance
+            if amount_due:
+                json_dict['amount_due'] = amount_due
+            if service_start_date:
+                json_dict['service_start_date'] = service_start_date
+            if service_end_date:
+                json_dict['service_end_date'] = servie_end_date
+            if service_address:
+                json_dict['service_address'] = service_address
+            if service_address_recipient:
+                json_dict['service_address_recipient'] = service_address_recipient
+            if remittance_address:
+                json_dict['remittance_address'] = remittance_address
+            if remittance_address_recipient:
+                json_dict['remittance_address_recipient'] = remittance_address_recipient
+            
+            '''
+            
             if remittance_address_recipient:
                 json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
             elif vendor_name:
@@ -414,7 +469,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if items:
                 json_dict['line_items'] = items
 
-
+            '''
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
