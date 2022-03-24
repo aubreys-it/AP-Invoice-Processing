@@ -269,7 +269,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
                         json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
-                        json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
+                        json_dict['loc_name'] = str(shipping_address_recipient.valueString.replace("'", "''"))
             
             if not json_dict['loc_name']:
                 if customer_name:
