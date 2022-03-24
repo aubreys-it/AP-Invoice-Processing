@@ -471,11 +471,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             '''
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
-            json.dumps(
-                #json_dict
-                invoice
-            ),
-            mimetype='application/json'
+            #json.dumps(
+            #    json_dict
+            #),
+            #mimetype='application/json'
+            invoice
         )
         
     else:
