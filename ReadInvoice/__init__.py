@@ -125,8 +125,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CHATTANOOGA', 'HIXSON']
         },
         '7': {
-            'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND'],
-            'addr_key': ['UT CAMPUS']
+            'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND', 'STEFANOS PIZZA'],
+            'addr_key': ['UT CAMPUS'],
+            'exclude_key': ['HARDIN', 'VALLEY']
         },
         '8': {
             'name_key': ['LENOIR', '16BPdwSY4rTxz1s5j'],
@@ -182,7 +183,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['HAMILTON PLACE', 'HAMILTON', 'JOHNSON']
         },
         '22': {
-            'name_key': ['HARDIN'],
+            'name_key': ['HARDIN', 'VALLEY'],
             'addr_key': ['HARDIN']
         },
         '23': {
