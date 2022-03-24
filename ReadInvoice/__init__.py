@@ -241,6 +241,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
             
+            '''
             if vendor_name:
                 json_dict['vendor_name'] = vendor_name
             if vendor_address:
@@ -293,8 +294,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 json_dict['remittance_address'] = remittance_address
             if remittance_address_recipient:
                 json_dict['remittance_address_recipient'] = remittance_address_recipient
-            
-            '''
             
             if remittance_address_recipient:
                 json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
@@ -473,7 +472,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
-                json_dict
+                #json_dict
+                invoice
             ),
             mimetype='application/json'
         )
