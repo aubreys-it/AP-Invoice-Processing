@@ -9,7 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     invoice_uri = req.params.get('uri')
     key = req.params.get('key')
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
-    '''
+    
     #keys based on unique keywords in vendor name
     vendor_dict = {
         'AQUA CLEAR': {
@@ -193,7 +193,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     }
 
     loc_id = '99'
-    '''
+    
     if not invoice_uri:
         try:
             req_body = req.get_json()
@@ -294,6 +294,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 json_dict['remittance_address'] = remittance_address
             if remittance_address_recipient:
                 json_dict['remittance_address_recipient'] = remittance_address_recipient
+            '''
             
             if remittance_address_recipient:
                 json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
@@ -468,14 +469,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if items:
                 json_dict['line_items'] = items
 
-            '''
+            
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
-            #json.dumps(
-            #    json_dict
-            #),
-            #mimetype='application/json'
-            invoice
+            json.dumps(
+                json_dict
+            ),
+            mimetype='application/json'
         )
         
     else:
