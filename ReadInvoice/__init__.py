@@ -209,7 +209,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if invoice_uri:
         #form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
         #poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
-        form_recognizer_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+        document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
         poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
         
         invoices = poller.result()
