@@ -402,13 +402,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 tax = item.value.get("Tax")
                 try:
-                    line_item['tax'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(tax.value_data.text.replace('(', '-')))[0]
+                    line_item['tax'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(tax.value).replace('(', '-'))[0]
                 except:
                     line_item['tax'] = 'NULL'
                     
                 amount = item.value.get("Amount")
                 try:
-                    line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value_data.text.replace('(', '-')))[0]
+                    line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value).replace('(', '-'))[0]
                 except:
                     line_item['amount'] = 'NULL'
 
