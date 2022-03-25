@@ -376,7 +376,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 
                 unit_price = item.value.get("UnitPrice")
                 try:
-                    line_item['unit_price'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(unit_price.value_data.text.replace('(', '-')))[0]
+                    line_item['unit_price'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(unit_price.value).replace('(', '-'))[0]
                 except:
                     line_item['unit_price'] = 'NULL'
                     
