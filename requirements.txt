@@ -4,6 +4,6 @@
 
 azure-functions
 azure.core
-azure-ai-formrecognizer==4.0.0b3
-#azure-ai-formrecognizer
+azure-ai-formrecognizer==3.2.0b3
+azure-ai-formrecognizer
 simplejson
