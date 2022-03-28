@@ -3,6 +3,7 @@ import azure.functions as func
 from azure.core.credentials import AzureKeyCredential
 #from azure.ai.formrecognizer import FormRecognizerClient
 from azure.ai.formrecognizer import DocumentAnalysisClient
+from datetime import datetime
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
@@ -342,6 +343,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             elif service_end_date:
                 json_dict['inv_date'] = str(service_end_date.value)
             else:
+                #poss_dates=[]
+                #for w in invoices.pages[0].words:
+                    #if w.content.count('/')==2:
+                        #print(w.content)
                 json_dict['inv_date'] = ''
 
             if invoice_total:
@@ -417,6 +422,30 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if items:
                 json_dict['line_items'] = items
 
+        #Form Recognizer v3.2.0b3 doesn't pick up invoices dates as well as previous versions.
+        #If no date is found, the following code looks for any words in the document with two back slashes
+        #Orders any matches and outputs the oldest date
+        if not json_dict['inv_date']:
+            dates = []
+            for w in invoices.pages[0].words:
+                if w.content.count('/') == 2:
+                    sl_one = w.content.find('/')
+                    sl_two = w.content.find('/', sl_one + 1)
+
+                    try:    #See if value is really a date
+                        m = int(w.content[:sl_one])
+                        d = int(w.content[sl_one+1:sl_two])
+                        y = int(w.content[sl_two+1:])
+
+                        date_conv = datetime(y, m, d)
+
+                        dates.append(w.content)
+                    except:
+                        no_val = ''
+
+            if len(dates) > 0:
+                dates.sort(reverse=False)
+                json_dict['inv_date'] = dates[0]    #Select the oldest date
             
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
