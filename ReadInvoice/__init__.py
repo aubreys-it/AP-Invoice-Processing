@@ -267,13 +267,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
 
                     if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
-                        json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
+                        if customer_name:
+                            json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
-                        json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
+                        if service_address_recipient:
+                            json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
-                        json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
+                        if billing_address:     
+                            json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
                     elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
-                        json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
+                        if shipping_address_recipient:
+                            json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
             
             if not json_dict['loc_name']:
                 if customer_name:
