@@ -217,7 +217,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         json_dict={}
         items = []
         
-        for invoice in invoices.documents:
+        for invoice in invoices:
+        #for invoice in invoices.documents:
             vendor_name = invoice.fields.get("VendorName")    
             vendor_address = invoice.fields.get("VendorAddress")
             vendor_address_recipient = invoice.fields.get("VendorAddressRecipient")
@@ -347,10 +348,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             elif service_end_date:
                 json_dict['inv_date'] = str(service_end_date.value)
             else:
-                #poss_dates=[]
-                #for w in invoices.pages[0].words:
-                    #if w.content.count('/')==2:
-                        #print(w.content)
                 json_dict['inv_date'] = ''
 
             if invoice_total:
@@ -426,6 +423,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if items:
                 json_dict['line_items'] = items
 
+        '''Beta Version Having Issues - Save Code for possible future use
         #Form Recognizer v3.2.0b3 doesn't pick up invoices dates as well as previous versions.
         #If no date is found, the following code looks for any words in the document with two back slashes
         #Orders any matches and outputs the oldest date
@@ -450,7 +448,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if len(dates) > 0:
                 dates.sort(reverse=False)
                 json_dict['inv_date'] = dates[0]    #Select the oldest date
-            
+        '''
+        
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
