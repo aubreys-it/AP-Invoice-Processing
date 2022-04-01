@@ -127,7 +127,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CHATTANOOGA', 'HIXSON']
         },
         '7': {
-            'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND', 'STEFANOS PIZZA'],
+            'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND', 'STEFANOS PIZZA', 'CHICAGO'],
             'addr_key': ['UT CAMPUS'],
             'exclude_key': ['HARDIN', 'VALLEY']
         },
