@@ -314,6 +314,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_number'] = ''
 
+            #Make sure leading character of invoice number is alphanumeric
+            if json_dict['inv_number']:
+                while not json_dict['inv_number'][0].isalnum():
+                    json_dict['inv_number'] = json_dict['inv_number'][1:len(json_dict['inv_number'])]
+
             key_found = False
             exclude_key = False
                 
@@ -351,7 +356,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 json_dict['inv_date'] = ''
 
             if invoice_total:
-                #json_dict['inv_total'] = invoice_total
                 json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
             elif amount_due:
                 json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
