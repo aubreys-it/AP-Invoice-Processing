@@ -5,6 +5,23 @@ from azure.ai.formrecognizer import FormRecognizerClient
 #from azure.ai.formrecognizer import DocumentAnalysisClient
 from datetime import datetime
 
+def _viennaFindInvTotal(js):
+    '''Function to find Invoice Total From Vienna Coffee Invoices.
+       There is a known problem in the 2021-09-30 version of FormRecognizer in which the correct
+       invoice total amount for Vienna's layout will not be found.
+       The 2022-01-30 beta version seems to locate it as PreviousUnpaidBalance so this should
+       be a temporary fix until other bugs are worked out of the newer beta version'''
+
+    lineNum = 0
+    for l in js.lines:
+        if l.content == 'Balance Due This Invoice':
+            if js.lines[lineNum + 1]:
+                if js.lines[lineNum + 1].find('$') >= 0:
+                    invTotal = js.lines[lineNum + 1].content
+                    break
+        l += 1
+    return invTotal
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
 
@@ -367,20 +384,32 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             if 'inv_total_field' in vendor_dict[sage_vendors[json_dict['vendor_name']]]:
                 if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'invoice_total':
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
+                    if invoice_total:
+                        json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
                 elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'amount_due':
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
+                    if amount_due:
+                        json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
                 elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'subtotal':
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+                    if subtotal:
+                        json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
                 elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'previous_unpaid_balance':
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
-            else:
+                    if previous_unpaid_balance:
+                        json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
+                    else:
+                        if json_dict['vendor_name'] == 'VIENNA':
+                            try:
+                                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoices.pages[0]).replace('(','-')))[0]
+                            except:
+                                notFound = True
+            if not json_dict['inv_total']:
                 if invoice_total:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
                 elif amount_due:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
                 elif subtotal:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+                elif previous_unpaid_balance:
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                 else:
                     json_dict['inv_total'] = ''
             
