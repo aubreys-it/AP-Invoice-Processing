@@ -401,7 +401,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                                 json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoices.pages[0]).replace('(','-')))[0]
                             except:
                                 notFound = True
-            if not json_dict['inv_total']:
+                                
+            if not 'inv_total' in json_dict:
                 if invoice_total:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
                 elif amount_due:
