@@ -397,10 +397,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                     else:
                         if json_dict['vendor_name'] == 'VIENNA':
-                            #try:
-                            json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoice.pages[0]).replace('(','-')))[0]
-                            #except:
-                                #notFound = True
+                            try:
+                                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoice.pages[0]).replace('(','-')))[0]
+                            except:
+                                notFound = True
 
             if not 'inv_total' in json_dict:
                 if invoice_total:
@@ -507,7 +507,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
-                json_dict
+                #json_dict
+                invoices
             ),
             mimetype='application/json'
         )
