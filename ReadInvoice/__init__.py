@@ -84,7 +84,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'cust_name_type': 'ship_name',
             'sage_id': 'VIENNA',
             'inv_summarized': False,
-            'expect_loc_id': True
+            'expect_loc_id': True,
+            'inv_total_field': 'previous_unpaid_balance'
         },
         'WASSERSTROM': {
             'cust_name_type': 'ship_name',
@@ -210,6 +211,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
         poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
+        #Swap the 2 lines above with the two lines below to switch to newer version of FormRecognizer
         #document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
         #poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
         
@@ -218,6 +220,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         items = []
         
         for invoice in invoices:
+        #Swap the previous line with the next line to switch to newer version of FormRecognizer
         #for invoice in invoices.documents:
             vendor_name = invoice.fields.get("VendorName")    
             vendor_address = invoice.fields.get("VendorAddress")
@@ -326,10 +329,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 for key in location_dict[loc]['name_key']:
                     if json_dict['loc_name'].upper().find(key.upper()) >= 0:
                         key_found = True
+                    if not key_found:
+                        if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
+                            key_found = True
+
                     if 'exclude_key' in location_dict[loc]:
                         for excl in location_dict[loc]['exclude_key']:
                             if json_dict['loc_name'].upper().find(excl.upper()) >= 0:
                                 exclude_key = True
+                            if not exclude_key:
+                                if json_dict['loc_addr'].upper().find(excl.upper()) >= 0:
+                                    exclude_key = True
                                 
                     if key_found and not exclude_key:
                         loc_id = loc
@@ -355,14 +365,24 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_date'] = ''
 
-            if invoice_total:
-                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
-            elif amount_due:
-                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
-            elif subtotal:
-                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+            if 'inv_total_field' in vendor_dict[sage_vendors[json_dict['vendor_name']]]:
+                if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'invoice_total':
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
+                elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'amount_due':
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
+                elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'subtotal':
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+                elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'previous_unpaid_balance':
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
             else:
-                json_dict['inv_total'] = ''
+                if invoice_total:
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
+                elif amount_due:
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
+                elif subtotal:
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+                else:
+                    json_dict['inv_total'] = ''
             
             for idx, item in enumerate(invoice.fields.get("Items").value):
                 line_item = {}
