@@ -398,7 +398,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     else:
                         if json_dict['vendor_name'] == 'VIENNA':
                             #try:
-                            json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoices.pages[0]).replace('(','-')))[0]
+                            json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoices[0].pages[0]).replace('(','-')))[0]
                             #except:
                                 #notFound = True
 
