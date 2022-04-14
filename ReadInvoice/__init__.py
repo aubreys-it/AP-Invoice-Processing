@@ -508,7 +508,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             json.dumps(
                 #json_dict
-                invoices
+                invoices[0]
             ),
             mimetype='application/json'
         )
