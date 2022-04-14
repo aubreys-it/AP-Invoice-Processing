@@ -506,10 +506,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
-            json.dumps(
-                #json_dict
-                invoices[0]
-            ),
+            #json.dumps(
+            #    #json_dict
+            #),
+            invoices,
             mimetype='application/json'
         )
         
