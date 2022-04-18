@@ -477,6 +477,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             if items:
                 json_dict['line_items'] = items
+
+            json_dict = invoice.to_dict
         '''
         Beta Version Having Issues - Save Code for possible future use
         #Form Recognizer v3.2.0b3 doesn't pick up invoices dates as well as previous versions.
@@ -508,8 +510,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
-                #json_dict
-                invoices[0].fields
+                json_dict
             ),
             mimetype='application/json'
         )
