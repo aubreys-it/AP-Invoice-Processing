@@ -1,3 +1,4 @@
+from dataclasses import fields
 import json, re
 import azure.functions as func
 from azure.core.credentials import AzureKeyCredential
@@ -476,8 +477,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             if items:
                 json_dict['line_items'] = items
-
-        '''Beta Version Having Issues - Save Code for possible future use
+        '''
+        Beta Version Having Issues - Save Code for possible future use
         #Form Recognizer v3.2.0b3 doesn't pick up invoices dates as well as previous versions.
         #If no date is found, the following code looks for any words in the document with two back slashes
         #Orders any matches and outputs the oldest date
@@ -498,7 +499,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         dates.append(w.content)
                     except:
                         no_val = ''
-
+        
             if len(dates) > 0:
                 dates.sort(reverse=False)
                 json_dict['inv_date'] = dates[0]    #Select the oldest date
@@ -507,8 +508,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(
             json.dumps(
-                json_dict
-                #invoices[0].pages[0]
+                #json_dict
+                invoices[0].fields
             ),
             mimetype='application/json'
         )
