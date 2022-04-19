@@ -6,23 +6,6 @@ from azure.ai.formrecognizer import FormRecognizerClient
 #from azure.ai.formrecognizer import DocumentAnalysisClient
 from datetime import datetime
 
-def _viennaFindInvTotal(js):
-    '''Function to find Invoice Total From Vienna Coffee Invoices.
-       There is a known problem in the 2021-09-30 version of FormRecognizer in which the correct
-       invoice total amount for Vienna's layout will not be found.
-       The 2022-01-30 beta version seems to locate it as PreviousUnpaidBalance so this should
-       be a temporary fix until other bugs are worked out of the newer beta version'''
-
-    lineNum = 0
-    for l in js.lines:
-        if l.content == 'Balance Due This Invoice':
-            if js.lines[lineNum + 1]:
-                if js.lines[lineNum + 1].find('$') >= 0:
-                    invTotal = js.lines[lineNum + 1].content
-                    break
-        l += 1
-    return invTotal
-
 def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
 
@@ -398,10 +381,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                     else:
                         if json_dict['vendor_name'] == 'VIENNA':
-                            try:
-                                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(_viennaFindInvTotal(invoice.pages[0]).replace('(','-')))[0]
-                            except:
-                                notFound = True
+                            #Known Issue acquiring Vienna Coffee Invoice Totals
+                            # The actual invoice total is not available as a field in the invoice results
+                            # Work around is to use a prebuilt model specifically for this vendor
+
+                            vienna_poller = form_recognizer_client.begin_recognize_custom_forms(
+                                model_id='ViennaCoffeeInvoices',
+                                form=invoice_uri,
+                                include_field_elements = True
+                            ) 
+                            vienna_invoice = poller.result()
+                            
+                            for v in vienna_invoice:
+                                vienna_total = v.fields.get("InvoiceTotal")
+                                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(vienna_total.value).replace('(', '-'))[0]
 
             if not 'inv_total' in json_dict:
                 if invoice_total:
