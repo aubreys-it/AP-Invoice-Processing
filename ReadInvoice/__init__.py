@@ -385,7 +385,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                             # The actual invoice total is not available as a field in the invoice results
                             # Work around is to use a prebuilt model specifically for this vendor
 
-                            with open(invoice_uri), 'rb') as fd:
+                            with open(invoice_uri, 'rb') as fd:
                                 vform = fd.read()
 
                             vienna_poller = form_recognizer_client.begin_recognize_custom_forms(
