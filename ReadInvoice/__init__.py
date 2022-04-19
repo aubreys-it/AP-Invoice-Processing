@@ -393,7 +393,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     model_id=vienna_model_id,
                     form_url=invoice_uri
                     ) 
-                vienna_invoice = poller.result()
+                vienna_invoice = vienna_poller.result()
                             
                 for v in vienna_invoice:
                     vienna_total = v.fields.get("InvoiceTotal")
