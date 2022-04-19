@@ -85,8 +85,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'cust_name_type': 'ship_name',
             'sage_id': 'VIENNA',
             'inv_summarized': False,
-            'expect_loc_id': True,
-            'inv_total_field': 'previous_unpaid_balance'
+            'expect_loc_id': True
+            #'inv_total_field': 'previous_unpaid_balance'
         },
         'WASSERSTROM': {
             'cust_name_type': 'ship_name',
