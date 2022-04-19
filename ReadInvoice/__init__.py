@@ -168,7 +168,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['UNIVERSITY', 'FIELD HOUSE']
         },
         '16': {
-            'name_key': ['GREEN', 'AzqNMmSY4ryrA1tGC', 'AUBGRE', 'GREENEVILLE'],
+            'name_key': ['GREEN', 'AzqNMmSY4ryrA1tGC', 'AUBGRE', 'GREENEVILLE', 'GREENVILLE'],
             'addr_key': ['GREENEVILLE', 'GREENVILLE']
         },
         '17': {
@@ -181,7 +181,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         '20': {
             'name_key': ['CATERING', '919', 'BYTCAT'],
-            'addr_key': ['HOMBERG', 'CENTRAL AVE']
+            'addr_key': ['HOMBERG', 'CENTRAL AVE'],
+            'exclude_key': []
         },
         '21': {
             'name_key': ['JOHNSON', 'JC', '16COOrSY4sXNu1qdT', 'AUBJOH'],
@@ -197,6 +198,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         }
     }
 
+    # Location 20, name key 919 shows up in other location addresses regularly
+    # to fix the issue, we add all the other locations name and address keys
+    # to 20's exclude key
+    for loc in location_dict:
+        if loc != '20':
+            for k in location_dict[loc]['name_key']:
+                location_dict['20']['exclude_key'].append(k)
+            for k in location_dict[loc]['addr_key']:
+                location_dict['20']['exclude_key'].append(k)
+
+    # Default location number
     loc_id = '99'
     
     if not invoice_uri:
