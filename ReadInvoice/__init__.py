@@ -86,7 +86,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'sage_id': 'VIENNA',
             'inv_summarized': False,
             'expect_loc_id': True
-            #'inv_total_field': 'previous_unpaid_balance'
         },
         'WASSERSTROM': {
             'cust_name_type': 'ship_name',
@@ -366,6 +365,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_date'] = ''
 
+            '''
             if 'inv_total_field' in vendor_dict[sage_vendors[json_dict['vendor_name']]]:
                 if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'invoice_total':
                     if invoice_total:
@@ -379,26 +379,27 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 elif vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_total_field'] == 'previous_unpaid_balance':
                     if previous_unpaid_balance:
                         json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
-                    else:
-                        if json_dict['vendor_name'] == 'VIENNA':
-                            # Known Issue acquiring Vienna Coffee Invoice Totals
-                            # The actual invoice total is not available as a field in the invoice results
-                            # Work around is to use a prebuilt model specifically for this vendor
-
-                            vienna_model_id = 'e492f78b-0731-4c8d-85ff-8c49c2efd080'
-
-                            vienna_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
-                                model_id=vienna_model_id,
-                                form_url=invoice_uri
-                            ) 
-                            vienna_invoice = poller.result()
-                            
-                            for v in vienna_invoice:
-                                vienna_total = v.fields.get("InvoiceTotal")
-                                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(vienna_total.value).replace('(', '-'))[0]
-
             '''
-            if not 'inv_total' in json_dict:
+                        
+
+            if json_dict['vendor_name'] == 'VIENNA':
+                # Known Issue acquiring Vienna Coffee Invoice Totals
+                # The actual invoice total is not available as a field in the invoice results
+                # Work around is to use a prebuilt model specifically for this vendor
+
+                vienna_model_id = 'e492f78b-0731-4c8d-85ff-8c49c2efd080'
+
+                vienna_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
+                    model_id=vienna_model_id,
+                    form_url=invoice_uri
+                    ) 
+                vienna_invoice = poller.result()
+                            
+                for v in vienna_invoice:
+                    vienna_total = v.fields.get("InvoiceTotal")
+                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(vienna_total.value).replace('(', '-'))[0]
+
+            else:
                 if invoice_total:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
                 elif amount_due:
@@ -409,7 +410,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                 else:
                     json_dict['inv_total'] = ''
-            '''
+            
             for idx, item in enumerate(invoice.fields.get("Items").value):
                 line_item = {}
                 description = item.value.get("Description")
