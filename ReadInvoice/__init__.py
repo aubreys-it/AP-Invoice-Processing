@@ -385,7 +385,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                             # The actual invoice total is not available as a field in the invoice results
                             # Work around is to use a prebuilt model specifically for this vendor
 
-                            vienna_model_id = '08458bc7-c753-497c-87af-f00bddca77d1'
+                            vienna_model_id = 'e492f78b-0731-4c8d-85ff-8c49c2efd080'
 
                             vienna_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
                                 model_id=vienna_model_id,
