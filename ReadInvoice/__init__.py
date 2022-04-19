@@ -397,6 +397,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                                 vienna_total = v.fields.get("InvoiceTotal")
                                 json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(vienna_total.value).replace('(', '-'))[0]
 
+            '''
             if not 'inv_total' in json_dict:
                 if invoice_total:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
@@ -408,7 +409,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                 else:
                     json_dict['inv_total'] = ''
-            
+            '''
             for idx, item in enumerate(invoice.fields.get("Items").value):
                 line_item = {}
                 description = item.value.get("Description")
