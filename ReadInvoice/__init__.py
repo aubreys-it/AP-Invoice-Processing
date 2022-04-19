@@ -381,14 +381,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
                     else:
                         if json_dict['vendor_name'] == 'VIENNA':
-                            #Known Issue acquiring Vienna Coffee Invoice Totals
+                            # Known Issue acquiring Vienna Coffee Invoice Totals
                             # The actual invoice total is not available as a field in the invoice results
                             # Work around is to use a prebuilt model specifically for this vendor
 
+                            with open(invoice_uri), 'rb') as fd:
+                                vform = fd.read()
+
                             vienna_poller = form_recognizer_client.begin_recognize_custom_forms(
                                 model_id='ViennaCoffeeInvoices',
-                                form=invoice_uri,
-                                include_field_elements = True
+                                form=vform
                             ) 
                             vienna_invoice = poller.result()
                             
