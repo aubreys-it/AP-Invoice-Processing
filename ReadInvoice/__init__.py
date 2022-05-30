@@ -360,6 +360,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_number'] = ''
 
+            # If inv_number contains a space, only grab what's left of the space
+            if json_dict['inv_number'].find(' ') >= 0:
+                json_dict['inv_number'] = json_dict['inv_number'][0:json_dict['inv_number'].find(' ')]
+
             #Make sure leading character of invoice number is alphanumeric
             if json_dict['inv_number']:
                 while not json_dict['inv_number'][0].isalnum():
