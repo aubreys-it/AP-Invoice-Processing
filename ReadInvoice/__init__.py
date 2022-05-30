@@ -140,7 +140,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         },
         '9': {
             'name_key': ['PAPERMILL', '169lRsSY4qSev1u1U', 'LANDMARK', '*MASTER*'],
-            'addr_key': ['BROOKVALE', 'PAPERMILL']
+            'addr_key': ['BROOKVALE', 'PAPERMILL'],
+            'exclude_key': ['SHRIMP']
         },
         '10': {
             'name_key': ['BISTRO', 'BYTBIS'],
@@ -182,7 +183,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         '20': {
             'name_key': ['CATERING', '919', 'BYTCAT'],
             'addr_key': ['HOMBERG', 'CENTRAL AVE'],
-            'exclude_key': []
+            'exclude_key': ['SHRIMP']
         },
         '21': {
             'name_key': ['JOHNSON', 'JC', '16COOrSY4sXNu1qdT', 'AUBJOH'],
@@ -195,6 +196,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         '23': {
             'name_key': ['SEVIERVILLE', '169lRsSY4sihy1w7h'],
             'addr_key': ['DOLLY PARTON', 'SEVIERVILLE']
+        },
+        '31': {
+            'name_key': ['FARRAGUT'],
+            'addr_key': ['11124 KINGSTON']
+        },
+        '32': {
+            'name_key': ['BEARDEN'],
+            'addr_key': ['5210 KINGSTON']
+        },
+        '33': {
+            'name_key': ['ALCOA'],
+            'addr_key': ['CALDERWOOD']
         }
     }
 
