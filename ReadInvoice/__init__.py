@@ -5,6 +5,7 @@ from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import FormRecognizerClient
 #from azure.ai.formrecognizer import DocumentAnalysisClient
 from datetime import datetime
+from . import vendors, locations
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
@@ -13,6 +14,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     key = req.params.get('key')
     endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
     
+    vendor_dict = vendors.vendor_dict
+    location_dict = locations.location_dict
+    
+    '''
     #keys based on unique keywords in vendor name
     vendor_dict = {
         'ALPHAGRAPHICS': {
@@ -108,11 +113,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'expect_loc_id': True
         }
     }
-    
+    '''
+
     sage_vendors = {}
     for v in vendor_dict.keys():
         sage_vendors[vendor_dict[v]['sage_id']] = v
-
+    '''
     location_dict = {
         '2': {
             'name_key': ['POWELL', '16COOrSY4qqj71p7m', 'AUBPOW', 'EMORY'],
@@ -216,6 +222,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'addr_key': ['CALDERWOOD']
         }
     }
+    '''
 
     # Location 20, name key 919 shows up in other location addresses regularly
     # to fix the issue, we add all the other locations name and address keys
