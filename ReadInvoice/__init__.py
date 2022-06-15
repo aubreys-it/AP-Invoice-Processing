@@ -15,6 +15,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     #keys based on unique keywords in vendor name
     vendor_dict = {
+        'ALPHA GRAPHICS': {
+            'cust_name_type': 'cust_name',
+            'sage_id': 'ALPHA',
+            'inv_summarized': False,
+            'expect_loc_id': False
+        },
         'AQUA CLEAR': {
             'cust_name_type': 'serv_name',
             'sage_id': 'AQUA CL',
