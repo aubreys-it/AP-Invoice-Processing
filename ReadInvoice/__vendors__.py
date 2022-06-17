@@ -12,6 +12,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'BLANK NEWS': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'BLANK',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'CARTRIDGE': {
         'cust_name_type': 'ship_name',
         'sage_id': 'CARTRID',
