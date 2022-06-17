@@ -56,6 +56,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         invoices = poller.result()
         json_dict={}
         items = []
+        word_list = []
         
         for invoice in invoices:
         #Swap the previous line with the next line to switch to newer version of FormRecognizer
@@ -86,6 +87,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             service_address_recipient = invoice.fields.get("ServiceAddressRecipient")
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
+
+            # Create a list of all words in the invoice
+            for p in invoice.pages:
+                for w in p['words']:
+                    word_list.append(w['content'])
+            word_list = [w.upper() for w in word_list]
             
             if remittance_address_recipient:
                 json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
@@ -182,7 +189,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             key_found = False
             exclude_key = False
-                
+
+            #_Get_Location_ID_________________________________________________________________________________________________________________
             for loc in location_dict:
                 for key in location_dict[loc]['name_key']:
                     if json_dict['loc_name'].upper().find(key.upper()) >= 0:
@@ -190,7 +198,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     if not key_found:
                         if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
                             key_found = True
-
                     if 'exclude_key' in location_dict[loc]:
                         for excl in location_dict[loc]['exclude_key']:
                             if json_dict['loc_name'].upper().find(excl.upper()) >= 0:
@@ -198,16 +205,32 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                             if not exclude_key:
                                 if json_dict['loc_addr'].upper().find(excl.upper()) >= 0:
                                     exclude_key = True
-                                
                     if key_found and not exclude_key:
                         loc_id = loc
-                        
                     key_found = exclude_key = False
 
+                # If location not found in the customer name field, then look through addresses for keywords
                 if loc_id == '99':
                     for key in location_dict[loc]['addr_key']:
                         if json_dict['loc_addr'].upper().find(key.upper()) >= 0:
                             loc_id = loc
+
+            # If location still not found, search through all invoice words for keywords
+            if loc_id == '99':
+                for loc in location_dict:
+                    for key in location_dict[loc]['name_key']:
+                        key_found = key.upper() in word_list
+                        if 'exclude_key' in location_dict[loc]:
+                            for excl in location_dict[loc]['exclude_key']:
+                                if not exclude_key:
+                                    exclude_key = excl.upper() in word_list
+                        if key_found and not exclude_key:
+                            loc_id = loc
+                            break
+                        key_found = exclude_key = False
+                    if loc_id != '99':
+                        break
+            #_________________________________________________________________________________________________________________________________
 
             if vendor_dict[sage_vendors[json_dict['vendor_name']]]['expect_loc_id']:
                 json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
