@@ -89,7 +89,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
 
             # Create a list of all words in the invoice
-            for p in invoice.pages:
+            for p in invoice['pages']:
                 for w in p['words']:
                     word_list.append(w['content'])
             word_list = [w.upper() for w in word_list]
