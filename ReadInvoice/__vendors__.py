@@ -30,6 +30,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'CROSSFIRE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CROSS F',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'ELEVATION': {
         'cust_name_type': 'cust_name',
         'sage_id': 'ELEVATI',
