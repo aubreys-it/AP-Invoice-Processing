@@ -27,8 +27,8 @@ location_dict = {
         'exclude_key': ['HARDIN', 'VALLEY']
     },
     '8': {
-        'name_key': ['LENOIR', '16BPdwSY4rTxz1s5j'],
-        'addr_key': ['LENOIR']
+        'name_key': ['LENOIR', '16BPdwSY4rTxz1s5j', 'LENIOR'],
+        'addr_key': ['LENOIR', 'LENIOR']
     },
     '9': {
         'name_key': ['PAPERMILL', '169lRsSY4qSev1u1U', 'LANDMARK', '*MASTER*'],
