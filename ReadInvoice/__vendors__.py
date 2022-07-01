@@ -13,7 +13,7 @@ vendor_dict = {
         'expect_loc_id': False
     },
     'AQUA CLEAR': {
-        'cust_name_type': 'serv_name',
+        'cust_name_type': 'cust_name',
         'sage_id': 'AQUA CL',
         'inv_summarized': False,
         'expect_loc_id': True
