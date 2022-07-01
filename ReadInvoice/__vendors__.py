@@ -24,6 +24,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'BOEHM': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'BOEHM',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'CARTRIDGE': {
         'cust_name_type': 'ship_name',
         'sage_id': 'CARTRID',
@@ -41,6 +47,18 @@ vendor_dict = {
         'sage_id': 'CROSS F',
         'inv_summarized': False,
         'expect_loc_id': True
+    },
+    'DIXIE': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'DIXIEPR',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'DKNOXVILLE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'MIDWEST',
+        'inv_summarized': False,
+        'expect_loc_id': False
     },
     'ELEVATION': {
         'cust_name_type': 'cust_name',
@@ -78,12 +96,6 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True,
         'custom_model_id': '7b8a0aef-5083-441d-b039-0a1d5264253b'
-    },
-    'DIXIE': {
-        'cust_name_type': 'ship_name',
-        'sage_id': 'DIXIEPR',
-        'inv_summarized': False,
-        'expect_loc_id': True
     },
     'QUALITY BAKER': {
         'cust_name_type': 'cust_name',
