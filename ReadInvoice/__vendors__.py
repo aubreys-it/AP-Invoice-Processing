@@ -109,6 +109,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+     'THRASHER': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'THRASHE',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'TRITEX': {
         'cust_name_type': 'cust_name',
         'sage_id': 'TRITEX',
