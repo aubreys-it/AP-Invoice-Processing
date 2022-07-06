@@ -121,6 +121,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'UNITEDGRAPHIC': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'UNITEDG',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'VALLEY': {
         'cust_name_type': 'cust_name',
         'sage_id': 'VALL',
