@@ -36,6 +36,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'CENTRIWORK': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'THERMO',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'COZZINI': {
         'cust_name_type': 'ship_name',
         'sage_id': 'COZZINI',
