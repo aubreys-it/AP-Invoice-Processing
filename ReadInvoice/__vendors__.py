@@ -42,6 +42,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'CINTAS': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'CONTAS',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'COZZINI': {
         'cust_name_type': 'ship_name',
         'sage_id': 'COZZINI',
