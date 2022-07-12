@@ -15,7 +15,7 @@ location_dict = {
     '5': {
         'name_key': ['MARYVILLE', 'AzqNMmSY4qGKj1rhz', '- MARYVILLE', "AUBREY'S INC."],
         'addr_key': ['- MARYVILLE'],
-        'exclude_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY']
+        'exclude_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY', 'BLUE TICK']
     },
     '6': {
         'name_key': ['HIXSON', '169lRsSY4rjvz1ulr', 'CHATTANOOGA'],
