@@ -30,6 +30,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'BUCKHEAD': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'BUCKHEA',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'CARTRIDGE': {
         'cust_name_type': 'ship_name',
         'sage_id': 'CARTRID',
