@@ -44,7 +44,7 @@ location_dict = {
         'addr_key': ['CLEVELAND']
     },
     '12': {
-        'name_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY'],
+        'name_key': ['BLUETICK', 'BLUMAR', "BARLEY'S MARYVILLE", 'BARLEY', 'BLUE TICK'],
         'addr_key': ['BROADWAY', 'BLUE TICK'],
         'exclude_key': ['AzqNMmSY4qGKj1rhz']
     },
