@@ -127,6 +127,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'SYSCO': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'SYSCO',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
      'THRASHER': {
         'cust_name_type': 'cust_name',
         'sage_id': 'THRASHE',
