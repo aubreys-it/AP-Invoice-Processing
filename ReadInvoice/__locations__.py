@@ -36,8 +36,8 @@ location_dict = {
         'exclude_key': ['SHRIMP']
     },
     '10': {
-        'name_key': ['BISTRO', 'BYTBIS'],
-        'addr_key': ['BROOKVIEW']
+        'name_key': ['BISTRO', 'BYTBIS', 'NORTH CENTRAL'],
+        'addr_key': ['1123', 'NORTH CENTRAL']
     },
     '11': {
         'name_key': ['CLEVELAND', '16BPdwSY4rdjD1sEP'],
