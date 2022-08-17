@@ -157,6 +157,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'VALLCY': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'VALL',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'VIENNA': {
         'cust_name_type': 'ship_name',
         'sage_id': 'VIENNA',
