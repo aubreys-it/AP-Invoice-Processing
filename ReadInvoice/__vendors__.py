@@ -123,7 +123,7 @@ vendor_dict = {
     },
     'QUALITY BAKER': {
         'cust_name_type': 'cust_name',
-        'sage_id': 'CYBAKE',
+        'sage_id': 'Q BAKER',
         'inv_summarized': False,
         'expect_loc_id': True
     },
