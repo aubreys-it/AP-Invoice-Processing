@@ -102,6 +102,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'KATOM': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'KATOM',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'KNOX TN TODAY': {
         'cust_name_type': 'cust_name',
         'sage_id': 'KNOX TT',
