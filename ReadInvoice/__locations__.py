@@ -62,7 +62,8 @@ location_dict = {
     },
     '16': {
         'name_key': ['GREEN', 'AzqNMmSY4ryrA1tGC', 'AUBGRE', 'GREENEVILLE', 'GREENVILLE'],
-        'addr_key': ['GREENEVILLE', 'GREENVILLE']
+        'addr_key': ['GREENEVILLE', 'GREENVILLE'],
+        'exclude_key': ['JOHNSON']
     },
     '17': {
         'name_key': ['BRISTOL', '16CHy7SY4s9162seP', 'AUBBRI'],
@@ -89,6 +90,10 @@ location_dict = {
         'name_key': ['SEVIERVILLE', '169lRsSY4sihy1w7h'],
         'addr_key': ['DOLLY PARTON', 'SEVIERVILLE']
     },
+    '30': {
+        'name_key': ['QUALITY', 'BAKER'],
+        'addr_key': ['HOLSTON']
+    }
     '31': {
         'name_key': ['FARRAGUT'],
         'addr_key': ['11124 KINGSTON']
