@@ -93,7 +93,7 @@ location_dict = {
     '30': {
         'name_key': ['QUALITY', 'BAKER'],
         'addr_key': ['HOLSTON']
-    }
+    },
     '31': {
         'name_key': ['FARRAGUT'],
         'addr_key': ['11124 KINGSTON']
