@@ -84,6 +84,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'GASES-HARRIMAN': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'HOLSTON',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'HOBART': {
         'cust_name_type': 'serv_name',
         'sage_id': 'HOB SER',
