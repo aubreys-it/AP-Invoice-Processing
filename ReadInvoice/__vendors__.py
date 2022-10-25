@@ -30,6 +30,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'BIG ORANGE LAWN': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'BIG ORA',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'BLANK NEWS': {
         'cust_name_type': 'cust_name',
         'sage_id': 'BLANK',
