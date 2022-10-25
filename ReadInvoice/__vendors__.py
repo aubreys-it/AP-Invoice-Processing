@@ -6,6 +6,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'AFC URGENT': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'AFC URG',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'ALL THINGS HOT': {
         'cust_name_type': 'cust_name',
         'sage_id': 'ALL THI',
