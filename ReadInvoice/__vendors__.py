@@ -1,5 +1,11 @@
 #keys based on unique keywords in vendor name
 vendor_dict = {
+    'ADT': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'ADT',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'ALL THINGS HOT': {
         'cust_name_type': 'cust_name',
         'sage_id': 'ALL THI',
