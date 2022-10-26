@@ -193,7 +193,7 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
-    'TER LAWN & LAND': {
+    'TER LAWNS & LAND': {
         'cust_name_type': 'cust_name',
         'sage_id': 'DOSTER',
         'inv_summarized': True,
