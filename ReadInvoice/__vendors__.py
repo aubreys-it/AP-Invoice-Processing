@@ -123,7 +123,7 @@ vendor_dict = {
     'DOSTER LAWN': {
         'cust_name_type': 'cust_name',
         'sage_id': 'DOSTER',
-        'inv_summarized': True,
+        'inv_summarized': False,
         'expect_loc_id': False
     },
     'ELEVATION': {
@@ -196,7 +196,7 @@ vendor_dict = {
     'TER LAWNS & LAND': {
         'cust_name_type': 'cust_name',
         'sage_id': 'DOSTER',
-        'inv_summarized': True,
+        'inv_summarized': False,
         'expect_loc_id': False
     },
      'THRASHER': {
