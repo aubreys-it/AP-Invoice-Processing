@@ -120,7 +120,7 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
-    'DOSTER LAWN': {
+    'DOSTER': {
         'cust_name_type': 'cust_name',
         'sage_id': 'DOSTER',
         'inv_summarized': False,
