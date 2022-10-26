@@ -105,7 +105,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             json_dict['summarized'] = False
 
             for vendor in vendor_dict:
-                if json_dict['vendor_name'].upper().find(vendor.upper()) >= 0 or json_dict['vendor_address_recipient'].upper().find(vendor.upper()) >=0:
+                if json_dict['vendor_name'].upper().find(vendor.upper()) >= 0:
                     json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
                     json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
 
