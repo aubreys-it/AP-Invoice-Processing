@@ -54,6 +54,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'CACHEPOT': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CACHEPOT',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'CARTRIDGE': {
         'cust_name_type': 'ship_name',
         'sage_id': 'CARTRID',
@@ -72,9 +78,27 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'CITYVIEW': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CITYVIE',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'COZZINI': {
         'cust_name_type': 'ship_name',
         'sage_id': 'COZZINI',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'CRESCENT CITY': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CRSCNT',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'CROCKER & WINSOR': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CROCKER',
         'inv_summarized': False,
         'expect_loc_id': True
     },
