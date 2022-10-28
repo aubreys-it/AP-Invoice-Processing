@@ -88,14 +88,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
             
-            if remittance_address_recipient:
+            if vendor_address_recipient:
+                json_dict['vendor_name'] = str(vendor_address_recipient.value.replace("'", "''"))
+            elif remittance_address_recipient:
                 json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
             elif vendor_name:
                 json_dict['vendor_name'] = str(vendor_name.value.replace("'", "''"))
             elif vendor_address:
                 json_dict['vendor_name'] = str(vendor_address.value.replace("'", "''"))
-            elif vendor_address_recipient:
-                json_dict['vendor_name'] = str(vendor_address_recipient.value.replace("'", "''"))
             elif remittance_address:
                 json_dict['vendor_name'] = str(remittance_address.value.replace("'", "''"))
             else:
