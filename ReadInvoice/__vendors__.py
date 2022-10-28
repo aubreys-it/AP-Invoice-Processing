@@ -138,6 +138,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'GORDON FOOD': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'GFS',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'HOBART': {
         'cust_name_type': 'serv_name',
         'sage_id': 'HOB SER',
