@@ -80,7 +80,8 @@ location_dict = {
     },
     '21': {
         'name_key': ['JOHNSON', 'JC', '16COOrSY4sXNu1qdT', 'AUBJOH'],
-        'addr_key': ['HAMILTON PLACE', 'HAMILTON', 'JOHNSON']
+        'addr_key': ['HAMILTON PLACE', 'HAMILTON', 'JOHNSON'],
+        'exclude_key': ['GREENV', 'GREENEV']
     },
     '22': {
         'name_key': ['HARDIN', 'VALLEY'],
