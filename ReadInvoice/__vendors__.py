@@ -174,6 +174,18 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'KNOX NEWS': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'NEWS S',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'LOCALIQ': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'NEWS S',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'NIEDLOV': {
         'cust_name_type': 'ship_name',
         'sage_id': 'NIEDLOV',
