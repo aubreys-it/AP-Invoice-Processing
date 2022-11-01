@@ -114,6 +114,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'CULINARY CLASSICS': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'PECO',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'DIXIE': {
         'cust_name_type': 'ship_name',
         'sage_id': 'DIXIEPR',
@@ -246,12 +252,30 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'PERFORMANCE': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'PERFORM',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'POSTEC': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'POSTEC',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'PREPWIZARD': {
         'cust_name_type': 'ship_name',
         'sage_id': 'PREPWIZ',
         'inv_summarized': False,
         'expect_loc_id': True,
         'custom_model_id': '7b8a0aef-5083-441d-b039-0a1d5264253b'
+    },
+    'PROFORMA': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'PROFORM',
+        'inv_summarized': False,
+        'expect_loc_id': False
     },
     'QUALITY BAKER': {
         'cust_name_type': 'cust_name',
