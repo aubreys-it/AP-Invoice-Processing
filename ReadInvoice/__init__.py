@@ -88,40 +88,41 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             remittance_address = invoice.fields.get("RemittanceAddress")
             remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
             
+            vendor_info = []
+
             if vendor_address_recipient:
-                json_dict['vendor_name'] = str(vendor_address_recipient.value.replace("'", "''"))
-            elif remittance_address_recipient:
-                json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
-            elif vendor_name:
-                json_dict['vendor_name'] = str(vendor_name.value.replace("'", "''"))
-            elif vendor_address:
-                json_dict['vendor_name'] = str(vendor_address.value.replace("'", "''"))
-            elif remittance_address:
-                json_dict['vendor_name'] = str(remittance_address.value.replace("'", "''"))
-            else:
-                json_dict['vendor_name'] = ''
+                vendor_info.append(vendor_address_recipient.value)
+            if remittance_address_recipient:
+                vendor_info.append(remittance_address_recipient.value)
+            if vendor_name:
+                vendor_info.append(vendor_name.value)
+            if vendor_address:
+                vendor_info.append(vendor_address.value)
+            if remittance_address:
+                vendor_info.append(remittance_address.value)
 
-            json_dict['loc_name'] = ''
-            json_dict['summarized'] = False
+            for info in vendor_info:
+                for vendor in vendor_dict:
+                    if info.upper().find(vendor.upper()) >= 0:
+                        json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
+                        json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
 
-            for vendor in vendor_dict:
-                if json_dict['vendor_name'].upper().find(vendor.upper()) >= 0:
-                    json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
-                    json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
+                        if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
+                            if customer_name:
+                                json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
+                        elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
+                            if service_address_recipient:
+                                json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
+                        elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
+                            if billing_address:     
+                                json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
+                        elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
+                            if shipping_address_recipient:
+                                json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
 
-                    if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
-                        if customer_name:
-                            json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
-                    elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
-                        if service_address_recipient:
-                            json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
-                    elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
-                        if billing_address:     
-                            json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
-                    elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
-                        if shipping_address_recipient:
-                            json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
-            
+                if json_dict:
+                    break
+
             if json_dict['vendor_name'] == 'PREPWIZ':
                 # Known Issue with PrepWizard Invoices not finding store location information
                 # This work around uses a custom model to find the missing info
