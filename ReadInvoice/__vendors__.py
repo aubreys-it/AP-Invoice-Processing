@@ -180,6 +180,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'LAKEWAY': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'LAKE WA',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'NEWS SENTINEL': {
         'cust_name_type': 'cust_name',
         'sage_id': 'KNOXVIL',
@@ -198,9 +204,39 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'MATLOCK TIRE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'MATLOCK',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'MOUNTAIN PRESS': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'THE MOU',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'NIEDLOV': {
         'cust_name_type': 'ship_name',
         'sage_id': 'NIEDLOV',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'OCEAN SELECT': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'OCEAN',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'ODP': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'OFFICE',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
+    'OFFICE DEPOT': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'OFFICE',
         'inv_summarized': False,
         'expect_loc_id': True
     },

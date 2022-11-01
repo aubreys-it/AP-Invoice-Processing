@@ -1,5 +1,9 @@
 #keys for determining invoice locations
 location_dict = {
+    '0': {
+        'name_key': ['CORPORATE'],
+        'addr_key': ['5401', 'STE 280']
+    },
     '2': {
         'name_key': ['POWELL', '16COOrSY4qqj71p7m', 'AUBPOW', 'EMORY'],
         'addr_key': ['POWELL', 'EMORY']

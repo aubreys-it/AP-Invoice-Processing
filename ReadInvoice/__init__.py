@@ -211,7 +211,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                             loc_id = loc
             #_________________________________________________________________________________________________________________________________
 
-            if vendor_dict[sage_vendors[json_dict['vendor_name']]]['expect_loc_id']:
+            if vendor_dict[sage_vendors[json_dict['vendor_name']]]['expect_loc_id'] and loc_id != '0':
                 json_dict['inv_number'] = loc_id + '-' + json_dict['inv_number']
 
             if invoice_date:
