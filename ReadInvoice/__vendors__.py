@@ -337,7 +337,7 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
-    'UNIVERSITY OF TENNESSEE 209 BLDG': {
+    'UNIVERSITY OF TENNESSEE 209': {
         'cust_name_type': 'ship_name',
         'sage_id': 'WUOT',
         'inv_summarized': False,
