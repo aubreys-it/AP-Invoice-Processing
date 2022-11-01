@@ -1,5 +1,11 @@
 #keys based on unique keywords in vendor name
 vendor_dict = {
+    '10730 KINGSTON PIKE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'MATLOCK',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'ADT': {
         'cust_name_type': 'cust_name',
         'sage_id': 'ADT',
