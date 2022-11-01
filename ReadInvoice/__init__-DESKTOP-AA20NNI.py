@@ -7,8 +7,8 @@ from azure.ai.formrecognizer import FormRecognizerClient
 from datetime import datetime
 import __locations__, __vendors__
 
-invoice_uri='https://aubdlakegen2.blob.core.windows.net/reelfoot/2022-11-01T11:03:58.1153326ZFAXPDF'
-key='34be503982d845bea7a8422816f3517a'
+invoice_uri=''
+key=''
 endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
 
 vendor_dict = __vendors__.vendor_dict
@@ -75,6 +75,7 @@ if invoice_uri:
         remittance_address_recipient = invoice.fields.get("RemittanceAddressRecipient")
 
         vendor_info = []
+        
         if vendor_address_recipient:
             vendor_info.append(vendor_address_recipient.value)
         if remittance_address_recipient:
@@ -107,42 +108,6 @@ if invoice_uri:
 
             if json_dict:
                 break
-
-        '''
-        if vendor_address_recipient:
-            json_dict['vendor_name'] = str(vendor_address_recipient.value.replace("'", "''"))
-        elif remittance_address_recipient:
-            json_dict['vendor_name'] = str(remittance_address_recipient.value.replace("'", "''"))
-        elif vendor_name:
-            json_dict['vendor_name'] = str(vendor_name.value.replace("'", "''"))
-        elif vendor_address:
-            json_dict['vendor_name'] = str(vendor_address.value.replace("'", "''"))
-        elif remittance_address:
-            json_dict['vendor_name'] = str(remittance_address.value.replace("'", "''"))
-        else:
-            json_dict['vendor_name'] = ''
-
-        json_dict['loc_name'] = ''
-        json_dict['summarized'] = False
-
-        for vendor in vendor_dict:
-            if json_dict['vendor_name'].upper().find(vendor.upper()) >= 0:
-                json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
-                json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
-
-                if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
-                    if customer_name:
-                        json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
-                elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
-                    if service_address_recipient:
-                        json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
-                elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
-                    if billing_address:     
-                        json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
-                elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
-                    if shipping_address_recipient:
-                        json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
-        '''
         
         if json_dict['vendor_name'] == 'PREPWIZ':
             # Known Issue with PrepWizard Invoices not finding store location information
