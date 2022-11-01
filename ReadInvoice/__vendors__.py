@@ -325,9 +325,21 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'UNITED WAY OF BLOUNT': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'UNITEDW',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'UNITEDGRAPHIC': {
         'cust_name_type': 'cust_name',
         'sage_id': 'UNITEDG',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'UNIVERSITY OF TENNESSEE 209 BLDG': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'WUOT',
         'inv_summarized': False,
         'expect_loc_id': False
     },

@@ -7,8 +7,8 @@ from azure.ai.formrecognizer import FormRecognizerClient
 from datetime import datetime
 import __locations__, __vendors__
 
-invoice_uri=''
-key=''
+invoice_uri='https://aubdlakegen2.blob.core.windows.net/reelfoot/2022-11-01T15:53:22.4825818Z202211011127395440028pdf'
+key='34be503982d845bea7a8422816f3517a'
 endpoint = "https://ap-formrecognizer.cognitiveservices.azure.com/"
 
 vendor_dict = __vendors__.vendor_dict
