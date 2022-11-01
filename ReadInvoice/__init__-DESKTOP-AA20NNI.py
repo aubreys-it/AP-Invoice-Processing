@@ -106,7 +106,7 @@ if invoice_uri:
                         if shipping_address_recipient:
                             json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
 
-            if json_dict:
+            if 'vendor_name' in json_dict:
                 break
         
         if json_dict['vendor_name'] == 'PREPWIZ':
@@ -125,7 +125,7 @@ if invoice_uri:
                 pw_location = v.fields.get("LocationName")
                 json_dict['loc_name'] = str(pw_location.value.replace("'", "''"))
 
-        elif not json_dict['loc_name']:
+        elif not 'loc_name' in json_dict:
             if customer_name:
                 json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
             elif shipping_address_recipient:
