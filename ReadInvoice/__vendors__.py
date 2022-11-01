@@ -283,6 +283,24 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'ROBIN EASTER': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'ROBIN E',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'SHRED-IT': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CIN DOC',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
+    'STERICYCLE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CIN DOC',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'SYSCO': {
         'cust_name_type': 'cust_name',
         'sage_id': 'SYSCO',
@@ -338,10 +356,22 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'WNML': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'SPORTS',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'WORLD': {
         'cust_name_type': 'in_table',
         'sage_id': 'WORLDSP',
         'inv_summarized': True,
         'expect_loc_id': True
+    },
+    'WUOT': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'WUOT',
+        'inv_summarized': False,
+        'expect_loc_id': False
     }
 }
