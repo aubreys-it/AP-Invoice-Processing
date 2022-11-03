@@ -245,7 +245,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 if amount_due:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
-                elif invoice_total:
+                elif invoice_total.value:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
                 elif invoice_total.value_data.text:
                     invoiceValue = invoice_total.value_data.text
