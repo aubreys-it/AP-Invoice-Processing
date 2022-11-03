@@ -247,6 +247,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
                 elif invoice_total:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
+                elif invoice_total.value_data.text:
+                    invoiceValue = invoice_total.value_data.text
+                    dotPosition = len(invoiceValue) - invoiceValue.rindex('.')
+                    invoiceValue = invoiceValue.replace('.', '')
+                    json_dict['inv_total'] = invoiceValue[0:dotPosition] + '.' + invoiceValue[dotPosition:]
                 elif subtotal:
                     json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
                 elif previous_unpaid_balance:
