@@ -233,6 +233,12 @@ if invoice_uri:
                 json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
             elif invoice_total.value_data.text:
                 invoiceValue = invoice_total.value_data.text
+
+                if not invoiceValue[-3].isnumeric():
+                    invoiceValue = invoiceValue[0:-3] + '.' + invoiceValue[-2:]
+                else:
+                    invoiceValue += '.'
+                    
                 dotPosition = len(invoiceValue) - invoiceValue.rindex('.')
                 invoiceValue = invoiceValue.replace('.', '')
                 json_dict['inv_total'] = invoiceValue[0:dotPosition] + '.' + invoiceValue[dotPosition:]
