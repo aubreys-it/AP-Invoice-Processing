@@ -78,7 +78,7 @@ location_dict = {
         'addr_key': ['EVAN GREEN', 'MORRISTOWN']
     },
     '20': {
-        'name_key': ['CATERING', '919', 'BYTCAT'],
+        'name_key': ['CATERING', '919', 'BYTCAT', 'ORANGERY'],
         'addr_key': ['HOMBERG', 'CENTRAL AVE'],
         'exclude_key': ['SHRIMP']
     },
