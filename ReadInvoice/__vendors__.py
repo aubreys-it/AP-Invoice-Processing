@@ -198,6 +198,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'LINK MEDIA': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'LINK',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'NEWS SENTINEL': {
         'cust_name_type': 'cust_name',
         'sage_id': 'KNOXVIL',
