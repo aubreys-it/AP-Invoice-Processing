@@ -374,6 +374,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'WIVK': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'CUMULUS',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'WNML': {
         'cust_name_type': 'ship_name',
         'sage_id': 'SPORTS',
