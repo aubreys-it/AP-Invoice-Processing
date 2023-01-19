@@ -265,65 +265,68 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 else:
                     json_dict['inv_total'] = ''
             
-            for idx, item in enumerate(invoice.fields.get("Items").value):
-                line_item = {}
-                description = item.value.get("Description")
-                try:
-                    line_item['description'] = str(description.value.replace("'", "''"))
-                except:
-                    line_item['description'] = ''
+            try:
+                for idx, item in enumerate(invoice.fields.get("Items").value):
+                    line_item = {}
+                    description = item.value.get("Description")
+                    try:
+                        line_item['description'] = str(description.value.replace("'", "''"))
+                    except:
+                        line_item['description'] = ''
 
-                quantity = item.value.get("Quantity")
-                try:
-                    line_item['quantity'] = re.findall(r"[-+]?\d*\.\d+|\d+", str(quantity.value))[0]
-                except:
-                    line_item['quantity'] = 'NULL'
+                    quantity = item.value.get("Quantity")
+                    try:
+                        line_item['quantity'] = re.findall(r"[-+]?\d*\.\d+|\d+", str(quantity.value))[0]
+                    except:
+                        line_item['quantity'] = 'NULL'
 
-                unit = item.value.get("Unit")
-                try:
-                    line_item['unit'] = str(unit.value.replace("'", "''"))
-                except:
-                    line_item['unit'] = ''
-                
-                unit_price = item.value.get("UnitPrice")
-                try:
-                    line_item['unit_price'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(unit_price.value).replace('(', '-'))[0]
-                except:
-                    line_item['unit_price'] = 'NULL'
+                    unit = item.value.get("Unit")
+                    try:
+                        line_item['unit'] = str(unit.value.replace("'", "''"))
+                    except:
+                        line_item['unit'] = ''
                     
-                product_code = item.value.get("ProductCode")
-                try:
-                    if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_summarized']:
-                        for loc in location_dict:
-                            for key in location_dict[loc]['name_key']:
-                                if line_item['description'].upper().find(key.upper()) >= 0:
-                                    loc_id  = loc
-                                
-                        line_item['product_code'] = loc_id + '-' + str(product_code.value.replace("'", "''"))
-                    else:
-                        line_item['product_code'] = str(product_code.value.replace("'", "''"))
-                except:
-                    line_item['product_code'] = ''
-                    
-                date = item.value.get("Date")
-                try:
-                    line_item['date'] = str(date.value)
-                except:
-                    line_item['date'] = ''
+                    unit_price = item.value.get("UnitPrice")
+                    try:
+                        line_item['unit_price'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(unit_price.value).replace('(', '-'))[0]
+                    except:
+                        line_item['unit_price'] = 'NULL'
+                        
+                    product_code = item.value.get("ProductCode")
+                    try:
+                        if vendor_dict[sage_vendors[json_dict['vendor_name']]]['inv_summarized']:
+                            for loc in location_dict:
+                                for key in location_dict[loc]['name_key']:
+                                    if line_item['description'].upper().find(key.upper()) >= 0:
+                                        loc_id  = loc
+                                    
+                            line_item['product_code'] = loc_id + '-' + str(product_code.value.replace("'", "''"))
+                        else:
+                            line_item['product_code'] = str(product_code.value.replace("'", "''"))
+                    except:
+                        line_item['product_code'] = ''
+                        
+                    date = item.value.get("Date")
+                    try:
+                        line_item['date'] = str(date.value)
+                    except:
+                        line_item['date'] = ''
 
-                tax = item.value.get("Tax")
-                try:
-                    line_item['tax'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(tax.value).replace('(', '-'))[0]
-                except:
-                    line_item['tax'] = 'NULL'
-                    
-                amount = item.value.get("Amount")
-                try:
-                    line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value).replace('(', '-'))[0]
-                except:
-                    line_item['amount'] = 'NULL'
+                    tax = item.value.get("Tax")
+                    try:
+                        line_item['tax'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(tax.value).replace('(', '-'))[0]
+                    except:
+                        line_item['tax'] = 'NULL'
+                        
+                    amount = item.value.get("Amount")
+                    try:
+                        line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value).replace('(', '-'))[0]
+                    except:
+                        line_item['amount'] = 'NULL'
 
-                items.append(line_item)
+                    items.append(line_item)
+            except:
+                items=[]
 
             if items:
                 json_dict['line_items'] = items
