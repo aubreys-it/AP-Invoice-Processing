@@ -290,7 +290,7 @@ vendor_dict = {
         'expect_loc_id': True
     },
     'ROBIN EASTER': {
-        'cust_name_type': 'cust_name',
+        'cust_name_type': 'ship_name',
         'sage_id': 'ROBIN E',
         'inv_summarized': False,
         'expect_loc_id': False
