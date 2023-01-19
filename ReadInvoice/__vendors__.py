@@ -295,6 +295,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'SHIFT4': {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'SHIFT4',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'SHRED-IT': {
         'cust_name_type': 'cust_name',
         'sage_id': 'CIN DOC',
