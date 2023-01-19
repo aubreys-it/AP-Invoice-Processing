@@ -318,6 +318,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     except:
                         line_item['tax'] = 'NULL'
                         
+                        
                     amount = item.value.get("Amount")
                     try:
                         line_item['amount'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount.value).replace('(', '-'))[0]
