@@ -392,7 +392,7 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
-    'WORLD': {
+    'WORLD SPICE': {
         'cust_name_type': 'in_table',
         'sage_id': 'WORLDSP',
         'inv_summarized': True,
