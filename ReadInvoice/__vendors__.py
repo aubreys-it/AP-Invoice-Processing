@@ -228,6 +228,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
+    'MIDWEST': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'MIDWEST',
+        'inv_summarized': False,
+        'expect_loc_id': False
+    },
     'MOUNTAIN PRESS': {
         'cust_name_type': 'cust_name',
         'sage_id': 'THE MOU',
