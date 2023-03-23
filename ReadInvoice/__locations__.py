@@ -25,11 +25,11 @@ location_dict = {
         'name_key': ['HIXSON', '169lRsSY4rjvz1ulr', 'CHATTANOOGA'],
         'addr_key': ['CHATTANOOGA', 'HIXSON']
     },
-    '7': {
-        'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND', 'STEFANOS PIZZA', 'CHICAGO'],
-        'addr_key': ['UT CAMPUS'],
-        'exclude_key': ['HARDIN', 'VALLEY']
-    },
+    #'7': {
+    #    'name_key': ['UT CAMPUS', 'STEFANOS-CUMBERLAND', 'STEFANOS PIZZA', 'CHICAGO'],
+    #    'addr_key': ['UT CAMPUS'],
+    #    'exclude_key': ['HARDIN', 'VALLEY']
+    #},
     '8': {
         'name_key': ['LENOIR', '16BPdwSY4rTxz1s5j', 'LENIOR'],
         'addr_key': ['LENOIR', 'LENIOR']
@@ -88,7 +88,7 @@ location_dict = {
         'exclude_key': ['GREENV', 'GREENEV']
     },
     '22': {
-        'name_key': ['HARDIN', 'VALLEY'],
+        'name_key': ['HARDIN', 'VALLEY', 'STEFANO'],
         'addr_key': ['HARDIN']
     },
     '23': {
