@@ -59,7 +59,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         items = []
         word_list = []
 
-        logging.log(invoices)
+        logging.log('Raw Invoice Data', invoices)
 
         for invoice in invoices:
         #Swap the previous line with the next line to switch to newer version of FormRecognizer
