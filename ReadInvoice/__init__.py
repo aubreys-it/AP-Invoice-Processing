@@ -6,6 +6,7 @@ from azure.ai.formrecognizer import FormRecognizerClient
 #from azure.ai.formrecognizer import DocumentAnalysisClient
 from datetime import datetime
 from . import __locations__, __vendors__
+import logging
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     #logging.info('Python HTTP trigger function processed a request.')
@@ -57,6 +58,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         json_dict={}
         items = []
         word_list = []
+
+        logging.log(invoices)
 
         for invoice in invoices:
         #Swap the previous line with the next line to switch to newer version of FormRecognizer
