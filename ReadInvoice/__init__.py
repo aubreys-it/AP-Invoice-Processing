@@ -3,7 +3,7 @@ import json, re
 import azure.functions as func
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import FormRecognizerClient
-#from azure.ai.formrecognizer import DocumentAnalysisClient
+from azure.ai.formrecognizer import DocumentAnalysisClient
 from datetime import datetime
 from . import __locations__, __vendors__
 import logging
@@ -49,10 +49,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
      
     if invoice_uri:
         form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
-        poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
+        #poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
         #Swap the 2 lines above with the two lines below to switch to newer version of FormRecognizer
-        #document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
-        #poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
+        document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+        poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
         
         invoices = poller.result()
         json_dict={}
@@ -61,9 +61,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
         logging.info(invoices)
 
-        for invoice in invoices:
+        #for invoice in invoices:
         #Swap the previous line with the next line to switch to newer version of FormRecognizer
-        #for invoice in invoices.documents:
+        for invoice in invoices.documents:
             vendor_name = invoice.fields.get("VendorName")    
             vendor_address = invoice.fields.get("VendorAddress")
             vendor_address_recipient = invoice.fields.get("VendorAddressRecipient")
