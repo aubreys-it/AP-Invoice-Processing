@@ -295,6 +295,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    'BAKER': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'Q BAKER',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'ROBIN EASTER': {
         'cust_name_type': 'ship_name',
         'sage_id': 'ROBIN E',
