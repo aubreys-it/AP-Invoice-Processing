@@ -386,6 +386,12 @@ vendor_dict = {
         'expect_loc_id': True,
         'custom_model_id': 'e492f78b-0731-4c8d-85ff-8c49c2efd080'
     },
+    'VONORE': {
+        'cust_name_type': 'cust_name',
+        'sage_id': 'VONORE',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'WASSERSTROM': {
         'cust_name_type': 'ship_name',
         'sage_id': 'WASSERS',
