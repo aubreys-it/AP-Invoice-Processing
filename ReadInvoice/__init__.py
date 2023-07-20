@@ -228,45 +228,27 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
                 json_dict['inv_date'] = ''
 
-            if json_dict['vendor_name'] == 'VIENNA':
-                # Known Issue acquiring Vienna Coffee Invoice Totals
-                # The actual invoice total is not available as a field in the invoice results
-                # Work around is to use a prebuilt model specifically for this vendor
+            if amount_due:
+                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
+            elif invoice_total.value:
+                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
+            elif invoice_total.value_data.text:
+                invoiceValue = invoice_total.value_data.text
 
-                vienna_model_id = vendor_dict['VIENNA']['custom_model_id']
-
-                vienna_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
-                    model_id=vienna_model_id,
-                    form_url=invoice_uri
-                    ) 
-                vienna_invoice = vienna_poller.result()
-                            
-                for v in vienna_invoice:
-                    vienna_total = v.fields.get("InvoiceTotal")
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(vienna_total.value).replace('(', '-'))[0]
-
-            else:
-                if amount_due:
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(amount_due.value).replace('(', '-'))[0]
-                elif invoice_total.value:
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(invoice_total.value).replace('(', '-'))[0]
-                elif invoice_total.value_data.text:
-                    invoiceValue = invoice_total.value_data.text
-
-                    if not invoiceValue[-3].isnumeric():
-                        invoiceValue = invoiceValue[0:-3] + '.' + invoiceValue[-2:]
-                    else:
-                        invoiceValue += '.'
-                    
-                    dotPosition = len(invoiceValue) - invoiceValue.rindex('.')
-                    invoiceValue = invoiceValue.replace('.', '')
-                    json_dict['inv_total'] = invoiceValue[0:dotPosition] + '.' + invoiceValue[dotPosition:]
-                elif subtotal:
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
-                elif previous_unpaid_balance:
-                    json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
+                if not invoiceValue[-3].isnumeric():
+                    invoiceValue = invoiceValue[0:-3] + '.' + invoiceValue[-2:]
                 else:
-                    json_dict['inv_total'] = ''
+                    invoiceValue += '.'
+                
+                dotPosition = len(invoiceValue) - invoiceValue.rindex('.')
+                invoiceValue = invoiceValue.replace('.', '')
+                json_dict['inv_total'] = invoiceValue[0:dotPosition] + '.' + invoiceValue[dotPosition:]
+            elif subtotal:
+                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(subtotal.value).replace('(', '-'))[0]
+            elif previous_unpaid_balance:
+                json_dict['inv_total'] = re.findall(r"[-+]?\d*\.\d+|\d+\-", str(previous_unpaid_balance.value).replace('(', '-'))[0]
+            else:
+                json_dict['inv_total'] = ''
             
             try:
                 for idx, item in enumerate(invoice.fields.get("Items").value):
