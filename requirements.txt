@@ -4,7 +4,6 @@
 
 azure-functions
 azure.core
-#azure-ai-formrecognizer==3.2.0b3
-azure-ai-formrecognizer
+azure-ai-formrecognizer==3.2.0
 simplejson
 datetime

@@ -48,22 +48,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         key = req_body.get('key')
      
     if invoice_uri:
-        form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
-        poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
+        #form_recognizer_client = FormRecognizerClient(endpoint, AzureKeyCredential(key))
+        #poller = form_recognizer_client.begin_recognize_invoices_from_url(invoice_uri)
         #Swap the 2 lines above with the two lines below to switch to newer version of FormRecognizer
-        #document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
-        #poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
+        document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+        poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-invoice", invoice_uri)
         
         invoices = poller.result()
         json_dict={}
         items = []
         word_list = []
 
-        logging.info(invoices)
-
-        for invoice in invoices:
+        #for invoice in invoices:
         #Swap the previous line with the next line to switch to newer version of FormRecognizer
-        #for invoice in invoices.documents:
+        for invoice in invoices.documents:
             vendor_name = invoice.fields.get("VendorName")    
             vendor_address = invoice.fields.get("VendorAddress")
             vendor_address_recipient = invoice.fields.get("VendorAddressRecipient")
@@ -94,15 +92,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             vendor_info = []
 
             if vendor_address_recipient:
-                vendor_info.append(vendor_address_recipient.value)
+                vendor_info.append(vendor_address_recipient.to_dict()['content'])
             if remittance_address_recipient:
-                vendor_info.append(remittance_address_recipient.value)
+                vendor_info.append(remittance_address_recipient.to_dict()['content'])
             if vendor_name:
-                vendor_info.append(vendor_name.value)
+                vendor_info.append(vendor_name.to_dict()['content'])
             if vendor_address:
-                vendor_info.append(vendor_address.value)
+                vendor_info.append(vendor_address.to_dict()['content'])
             if remittance_address:
-                vendor_info.append(remittance_address.value)
+                vendor_info.append(remittance_address.to_dict()['content'])
+
+            logging.info(vendor_info)
 
             for info in vendor_info:
                 for vendor in vendor_dict:
@@ -112,16 +112,23 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                         if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
                             if customer_name:
-                                json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
+                                json_dict['loc_name'] = customer_name.value
                         elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
                             if service_address_recipient:
-                                json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
+                                json_dict['loc_name'] = service_address_recipient.value
                         elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
                             if billing_address:     
-                                json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
+                                json_dict['loc_name'] = billing_address_recipient.value
                         elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
                             if shipping_address_recipient:
-                                json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
+                                json_dict['loc_name'] = shipping_address_recipient.value
+                        elif vendor_dict[vendor]['cust_name_type'] == 'vend_name':
+                            if vendor_address_recipient:
+                                json_dict['loc_name'] = vendor_address_recipient.value
+
+                        if 'loc_name' in json_dict:
+                            logging.info(json_dict['loc_name'])
+                            json_dict['loc_name'] = str(json_dict['loc_name']).replace("'", "''")
 
                 if 'vendor_name' in json_dict:
                     break
@@ -132,42 +139,51 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 pw_model_id = vendor_dict['PREPWIZARD']['custom_model_id']
 
-                pw_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
+                pw_poller = document_analysis_client.begin_analyze_document_from_url(
                     model_id=pw_model_id,
-                    form_url=invoice_uri
-                    ) 
+                    document_url=invoice_uri
+                    )
+
+                #pw_poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
+                #    model_id=pw_model_id,
+                #    form_url=invoice_uri
+                #    ) 
                 pw_invoice = pw_poller.result()
-                            
-                for v in pw_invoice:
+                
+                for v in pw_invoice.documents:
                     pw_location = v.fields.get("LocationName")
                     json_dict['loc_name'] = str(pw_location.value.replace("'", "''"))
 
             elif not 'loc_name' in json_dict:
                 if customer_name:
-                    json_dict['loc_name'] = str(customer_name.value.replace("'", "''"))
+                    json_dict['loc_name'] = customer_name.value
                 elif shipping_address_recipient:
-                    json_dict['loc_name'] = str(shipping_address_recipient.value.replace("'", "''"))
+                    json_dict['loc_name'] = shipping_address_recipient.value
                 elif service_address_recipient:
-                    json_dict['loc_name'] = str(service_address_recipient.value.replace("'", "''"))
+                    json_dict['loc_name'] = service_address_recipient.value
                 elif customer_id:
-                    json_dict['loc_name'] = str(customer_id.value.replace("'", "''"))
+                    json_dict['loc_name'] = customer_id.value
                 elif customer_address_recipient:
-                    json_dict['loc_name'] = str(customer_address_recipient.value.replace("'", "''"))
+                    json_dict['loc_name'] = customer_address_recipient.value
                 elif billing_address_recipient:
-                    json_dict['loc_name'] = str(billing_address_recipient.value.replace("'", "''"))
+                    json_dict['loc_name'] = billing_address_recipient.value
                 else:
                     json_dict['loc_name'] = ''
+                json_dict['loc_name'] = str(json_dict['loc_name']).replace("'", "''")
 
             if customer_address:
-                json_dict['loc_addr'] = str(customer_address.value.replace("'", "''"))
+                json_dict['loc_addr'] = customer_address.to_dict()['content']
             elif shipping_address:
-                json_dict['loc_addr'] = str(shipping_address.value.replace("'", "''"))
+                json_dict['loc_addr'] = shipping_address.to_dict()['content']
             elif billing_address:
-                json_dict['loc_addr'] = str(billing_address.value.replace("'", "''"))
+                json_dict['loc_addr'] = billing_address.to_dict()['content']
             elif service_address:
-                json_dict['loc_addr'] = str(service_address.value.replace("'", "''"))
+                json_dict['loc_addr'] = service_address.to_dict()['content']
             else:
                 json_dict['loc_addr'] = ''
+            json_dict['loc_addr'] = str(json_dict['loc_addr']).replace("'", "''")
+
+            logging.info(json_dict['loc_addr'])
 
             if invoice_id:
                 json_dict['inv_number'] = str(invoice_id.value.replace("'", "''"))
@@ -340,8 +356,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     if loc_id != '99':
                         break
 
-        '''
-        Beta Version Having Issues - Save Code for possible future use
+        
+        #Beta Version Having Issues - Save Code for possible future use
         #Form Recognizer v3.2.0b3 doesn't pick up invoices dates as well as previous versions.
         #If no date is found, the following code looks for any words in the document with two back slashes
         #Orders any matches and outputs the oldest date
@@ -366,7 +382,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if len(dates) > 0:
                 dates.sort(reverse=False)
                 json_dict['inv_date'] = dates[0]    #Select the oldest date
-        '''
+
+        #Remove newline characters from json_dict values
+        for key in json_dict:
+            if isinstance(json_dict[key], str):
+                if json_dict[key].find('\n') >= 0:            
+                    json_dict[key] = json_dict[key] = json_dict[key][:json_dict[key].find('\n')]
+        
         
         #return func.HttpResponse("Test 3", status_code=210)
         return func.HttpResponse(

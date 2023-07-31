@@ -18,17 +18,17 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': False
     },
-    'ALL THINGS HOT': {
-        'cust_name_type': 'cust_name',
-        'sage_id': 'ALL THI',
-        'inv_summarized': False,
-        'expect_loc_id': True
-    },
     'ALPHAGRAPHICS': {
         'cust_name_type': 'cust_name',
         'sage_id': 'ALPHA',
         'inv_summarized': False,
         'expect_loc_id': False
+    },
+    'AND COLD': {
+        'cust_name_type': 'bill_name',
+        'sage_id': 'ALL THI',
+        'inv_summarized': False,
+        'expect_loc_id': True
     },
     'AQUA CLEAR': {
         'cust_name_type': 'cust_name',
@@ -277,7 +277,7 @@ vendor_dict = {
         'expect_loc_id': False
     },
     'PREPWIZARD': {
-        'cust_name_type': 'ship_name',
+        'cust_name_type': 'vend_name',
         'sage_id': 'PREPWIZ',
         'inv_summarized': False,
         'expect_loc_id': True,
@@ -336,6 +336,12 @@ vendor_dict = {
         'sage_id': 'DOSTER',
         'inv_summarized': False,
         'expect_loc_id': False
+    },
+    'THINGS HOT': {
+        'cust_name_type': 'bill_name',
+        'sage_id': 'ALL THI',
+        'inv_summarized': False,
+        'expect_loc_id': True
     },
      'THRASHER': {
         'cust_name_type': 'cust_name',
