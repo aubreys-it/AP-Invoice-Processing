@@ -168,7 +168,7 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
-    'J & F MECHANICAL': {
+    'J & F': {
         'cust_name_type': 'bill_name',
         'sage_id': 'J&F MEC',
         'inv_summarized': False,
