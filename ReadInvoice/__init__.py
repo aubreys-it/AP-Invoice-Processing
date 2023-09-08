@@ -106,29 +106,35 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             for info in vendor_info:
                 for vendor in vendor_dict:
-                    if info.upper().find(vendor.upper()) >= 0:
-                        json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
-                        json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
+                    vendor_match = []
+                    vendor_match.append(vendor)
+                    if 'address' in vendor_dict[vendor].keys():
+                        vendor_match.append(vendor_dict[vendor]['address'])
 
-                        if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
-                            if customer_name:
-                                json_dict['loc_name'] = customer_name.value
-                        elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
-                            if service_address_recipient:
-                                json_dict['loc_name'] = service_address_recipient.value
-                        elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
-                            if billing_address:     
-                                json_dict['loc_name'] = billing_address_recipient.value
-                        elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
-                            if shipping_address_recipient:
-                                json_dict['loc_name'] = shipping_address_recipient.value
-                        elif vendor_dict[vendor]['cust_name_type'] == 'vend_name':
-                            if vendor_address_recipient:
-                                json_dict['loc_name'] = vendor_address_recipient.value
+                    for v in vendor_match:
+                        if info.upper().find(v.upper()) >= 0:
+                            json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
+                            json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
 
-                        if 'loc_name' in json_dict:
-                            logging.info(json_dict['loc_name'])
-                            json_dict['loc_name'] = str(json_dict['loc_name']).replace("'", "''")
+                            if vendor_dict[vendor]['cust_name_type'] == 'cust_name':
+                                if customer_name:
+                                    json_dict['loc_name'] = customer_name.value
+                            elif vendor_dict[vendor]['cust_name_type'] == 'serv_name':
+                                if service_address_recipient:
+                                    json_dict['loc_name'] = service_address_recipient.value
+                            elif vendor_dict[vendor]['cust_name_type'] == 'bill_name':
+                                if billing_address:     
+                                    json_dict['loc_name'] = billing_address_recipient.value
+                            elif vendor_dict[vendor]['cust_name_type'] == 'ship_name':
+                                if shipping_address_recipient:
+                                    json_dict['loc_name'] = shipping_address_recipient.value
+                            elif vendor_dict[vendor]['cust_name_type'] == 'vend_name':
+                                if vendor_address_recipient:
+                                    json_dict['loc_name'] = vendor_address_recipient.value
+
+                            if 'loc_name' in json_dict:
+                                logging.info(json_dict['loc_name'])
+                                json_dict['loc_name'] = str(json_dict['loc_name']).replace("'", "''")
 
                 if 'vendor_name' in json_dict:
                     break
