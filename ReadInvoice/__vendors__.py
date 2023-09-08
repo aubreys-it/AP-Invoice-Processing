@@ -247,6 +247,12 @@ vendor_dict = {
         'inv_summarized': False,
         'expect_loc_id': True
     },
+    "NIEDLOV'S": {
+        'cust_name_type': 'ship_name',
+        'sage_id': 'NIEDLOV',
+        'inv_summarized': False,
+        'expect_loc_id': True
+    },
     'OCEAN SELECT': {
         'cust_name_type': 'cust_name',
         'sage_id': 'OCEAN',
