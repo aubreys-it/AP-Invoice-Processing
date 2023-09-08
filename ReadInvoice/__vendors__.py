@@ -171,6 +171,7 @@ vendor_dict = {
     'J & F': {
         'cust_name_type': 'bill_name',
         'sage_id': 'J&F MEC',
+        'address': '4589 Rutledge Pike'
         'inv_summarized': False,
         'expect_loc_id': True
     },
