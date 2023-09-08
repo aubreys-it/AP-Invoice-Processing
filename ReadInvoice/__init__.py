@@ -112,7 +112,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                         vendor_match.append(vendor_dict[vendor]['address'])
 
                     for v in vendor_match:
-                        if info.upper().find(v.upper()) >= 0:
+                        if info.upper().find(v.upper()) >= 0 or v.upper().find(info.upper()) >= 0:
                             json_dict['vendor_name'] = vendor_dict[vendor]['sage_id']
                             json_dict['summarized'] = vendor_dict[vendor]['inv_summarized']
 
