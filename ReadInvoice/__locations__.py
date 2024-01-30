@@ -39,10 +39,6 @@ location_dict = {
         'addr_key': ['BROOKVALE', 'PAPERMILL'],
         'exclude_key': ['SHRIMP']
     },
-    '10': {
-        'name_key': ['BISTRO', 'BYTBIS', 'NORTH CENTRAL'],
-        'addr_key': ['1123', 'NORTH CENTRAL']
-    },
     '11': {
         'name_key': ['CLEVELAND', '16BPdwSY4rdjD1sEP'],
         'addr_key': ['CLEVELAND']
@@ -77,10 +73,14 @@ location_dict = {
         'name_key': ['MORRISTOWN', '169lRsSY4sLmL1vml', 'AUBMOR', 'MORRIST'],
         'addr_key': ['EVAN GREEN', 'MORRISTOWN']
     },
+    '19': {
+        'name_key': ['NORTH CENTRAL'],
+        'addr_key': ['1123', 'NORTH CENTRAL']
+    },
     '20': {
-        'name_key': ['CATERING', '919', 'BYTCAT', 'ORANGERY'],
-        'addr_key': ['HOMBERG', 'CENTRAL AVE'],
-        'exclude_key': ['SHRIMP']
+        'name_key': ['BISTRO', 'BYTBIS', '919', 'ORANGERY'],
+        'addr_key': ['HOMBERG'],
+        'exclude_key': ['SHRIMP','CATERING', 'BYTCAT']
     },
     '21': {
         'name_key': ['JOHNSON', 'JC', '16COOrSY4sXNu1qdT', 'AUBJOH'],
@@ -110,5 +110,10 @@ location_dict = {
     '33': {
         'name_key': ['ALCOA'],
         'addr_key': ['CALDERWOOD']
-    }
+    },
+    '42': {
+        'name_key': ['CATERING', '919', 'BYTCAT', 'ORANGERY'],
+        'addr_key': ['HOMBERG', 'CENTRAL AVE'],
+        'exclude_key': ['SHRIMP', 'BISTRO']
+    },
 }
