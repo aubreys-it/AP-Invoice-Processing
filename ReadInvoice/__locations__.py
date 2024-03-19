@@ -112,7 +112,7 @@ location_dict = {
         'addr_key': ['CALDERWOOD']
     },
     '42': {
-        'name_key': ['CATERING', '919', 'BYTCAT', 'ORANGERY'],
+        'name_key': ['CATERING', 'BYTCAT', 'ORANGERY'],
         'addr_key': ['HOMBERG', 'CENTRAL AVE'],
         'exclude_key': ['SHRIMP', 'BISTRO']
     },
